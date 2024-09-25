@@ -1,14 +1,13 @@
 using katio.Business.Services;
 using katio.Business.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using Katio.Data;
 using katio.Data;
-
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Create DataBase
-builder.Services.AddDbContext<katioContext>(opt => opt.UseInMemoryDatabase("katio"));
+builder.Services.AddDbContext<KatioContext>(
+    opt => opt.UseNpgsql(builder.Configuration.GetConnectionString("KatioDBPSQL")));
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -21,6 +20,7 @@ builder.Services.AddScoped<INarratorService, NarratorService>();
 builder.Services.AddScoped<IGenreService, GenreService>();
 builder.Services.AddScoped<IAudioBookService, AudioBookService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -30,15 +30,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-PopulateDB(app);
+//PopulateDB(app);
 
 app.UseHttpsRedirection();
 
 app.MapControllers();
 
 app.Run();
-
-
 
 // Datos de Base de Datos en Memoria
 #region PopulateDB
