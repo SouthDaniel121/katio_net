@@ -10,10 +10,11 @@ namespace katio.Business.Services;
 public class GenreService : IGenreService
 {
     // Lista de géneros
-    private readonly katioContext _context;
+    private readonly KatioContext _context;
+    private readonly IUnitOfWork _unitOfWork;
 
     // Constructor
-    public GenreService(katioContext context)
+    public GenreService(KatioContext context)
     {
         _context = context;
     }
@@ -27,7 +28,7 @@ public class GenreService : IGenreService
             Utilities.BuildResponse(HttpStatusCode.NotFound, BaseMessageStatus.BOOK_NOT_FOUND, new List<Genre>());
     }
 
-    #region Crear Actualizar Eliminar
+    #region Genero | Crear Actualizar eliminar
 
     // Crear géneros
     public async Task<BaseMessage<Genre>> CreateGenre(Genre genre)
@@ -77,7 +78,15 @@ public class GenreService : IGenreService
 
     #endregion
 
-    #region Busqueda en genero LITERARIO
+    #region Busqueda por genero literario
+    // Buscar por el id
+    public async Task<BaseMessage<Genre>> GetByGenreId(int id)
+    {
+        var result = await _unitOfWork.GenreRepository.FindAsync(id);
+        return result != null ? Utilities.BuildResponse<Genre>
+            (HttpStatusCode.OK, BaseMessageStatus.OK_200, new List<Genre> { result }) :
+            Utilities.BuildResponse(HttpStatusCode.NotFound, BaseMessageStatus.GENRE_NOT_FOUND, new List<Genre>());
+    }
 
     // Buscar género por Nombre
     public async Task<BaseMessage<Genre>> GetGenresByName(string name)

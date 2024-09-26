@@ -1,23 +1,25 @@
-using katio.Data;
-using katio.Data.Models;
+﻿using katio.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Katio.Data;
+namespace katio.Data;
 
 public class UnitOfWork : IUnitOfWork, IDisposable
 {
-    
-    private readonly katioContext _context;
+
+    private readonly KatioContext _context;
     private bool _disposed = false;
     private IRepository<int, Book> _bookRepository;
     private IRepository<int, Author> _authorRepository;
+    private IRepository<int, AudioBook> _audioBookRepository;
+    private IRepository<int, Genre> _genreRepository;
+    private IRepository<int, Narrator> _narratorRepository;
 
-    public UnitOfWork(katioContext context)
+    public UnitOfWork(KatioContext context)
     {
         _context = context;
     }
-    
-    
+
+
     #region Repositories
     public IRepository<int, Book> BookRepository
     {
@@ -27,7 +29,6 @@ public class UnitOfWork : IUnitOfWork, IDisposable
             return _bookRepository;
         }
     }
-
     public IRepository<int, Author> AuthorRepository
     {
         get
@@ -36,10 +37,32 @@ public class UnitOfWork : IUnitOfWork, IDisposable
             return _authorRepository;
         }
     }
+    public IRepository<int, AudioBook> AudioBookRepository
+    {
+        get
+        {
+            _audioBookRepository ??= new Repository<int, AudioBook>(_context);
+            return _audioBookRepository;
+        }
 
-    IRepository<int, Book> IUnitOfWork.BookRepository => throw new NotImplementedException();
+    }
+    public IRepository<int, Genre> GenreRepository
+    {
+        get
+        {
+            _genreRepository ??= new Repository<int, Genre>(_context);
+            return _genreRepository;
+        }
+    }
+    public IRepository<int, Narrator> NarratorRepository
+    {
+        get
+        {
+            _narratorRepository ??= new Repository<int, Narrator>(_context);
+            return _narratorRepository;
+        }
+    }
 
-    IRepository<int, Author> IUnitOfWork.AuthorRepository => throw new NotImplementedException();
     #endregion
 
     public async Task SaveAsync()
@@ -50,18 +73,18 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         }
         catch (DbUpdateConcurrencyException ex)
         {
-            
+
             ex.Entries.Single().Reload();
         }
     }
 
 
-#region IDisposable
+    #region IDisposable
     protected virtual void Dispose(bool disposing)
     {
-        if(!_disposed)
+        if (!_disposed)
         {
-            if(disposing)
+            if (disposing)
             {
                 _context.DisposeAsync();
             }
@@ -73,6 +96,6 @@ public class UnitOfWork : IUnitOfWork, IDisposable
     {
         Dispose(true);
     }
-#endregion
-    
+    #endregion
+
 }

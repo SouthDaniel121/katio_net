@@ -10,23 +10,27 @@ namespace katio.Business.Services;
 public class AudioBookService : IAudioBookService
 {
     // Lista de libros
-    private readonly katioContext _context;
+    private readonly KatioContext _context;
+    private readonly IUnitOfWork _unitOfWork;
 
     // Constructor
-    public AudioBookService(katioContext context)
+    public AudioBookService(KatioContext context, IUnitOfWork unitOfWork)
     {
         _context = context;
+        _unitOfWork = unitOfWork;
     }
+    // Constructor
 
     // Traer todos los Audiolibros
     public async Task<BaseMessage<AudioBook>> Index()
     {
-        var result = await _context.AudioBooks.ToListAsync();
+        // var result = await _context.AudioBooks.ToListAsync();
+        var result = await _unitOfWork.AudioBookRepository.GetAllAsync();
         return result.Any() ? Utilities.BuildResponse<AudioBook>(HttpStatusCode.OK, BaseMessageStatus.OK_200, result) :
             Utilities.BuildResponse(HttpStatusCode.NotFound, BaseMessageStatus.AUDIOBOOK_NOT_FOUND, new List<AudioBook>());
     }
 
-    #region Crear Actualizar Eliminar
+    #region Create Update Delete
     // Crear un Audiolibro
     public async Task<BaseMessage<AudioBook>> CreateAudioBook(AudioBook audioBook)
     {
@@ -88,7 +92,15 @@ public class AudioBookService : IAudioBookService
     }
     #endregion
 
-    #region Busqueda por audioLibro
+    #region Busqueda por libro
+    // Buscar por id
+    public async Task<BaseMessage<AudioBook>> GetAudioBookById(int id)
+    {
+        var result = await _unitOfWork.AudioBookRepository.FindAsync(id);
+        return result != null ? Utilities.BuildResponse<AudioBook>
+            (HttpStatusCode.OK, BaseMessageStatus.OK_200, new List<AudioBook> { result }) :
+            Utilities.BuildResponse(HttpStatusCode.NotFound, BaseMessageStatus.AUDIOBOOK_NOT_FOUND, new List<AudioBook>());
+    } 
     // Buscar por Nombre
     public async Task<BaseMessage<AudioBook>> GetByAudioBookName(string name)
     {
@@ -147,7 +159,7 @@ public class AudioBookService : IAudioBookService
 
     #endregion
 
-    #region Busqueda por autor
+    #region Busqueda por author
 
     // Buscar por Autor
     public async Task<BaseMessage<AudioBook>> GetAudioBookByAuthor(int authorId)

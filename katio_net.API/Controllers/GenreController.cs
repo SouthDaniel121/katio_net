@@ -9,9 +9,9 @@ namespace katio.API.Controllers
     public class GenreController : ControllerBase
     {
 
-        #region  Servicio y Constructor
+        #region Servicios y Contructor 
 
-        // Servicio de genero
+        // Servicio de generos
         private readonly IGenreService _genreService;
 
         // Constructor
@@ -22,7 +22,7 @@ namespace katio.API.Controllers
 
         #endregion
 
-        #region  Trae todo 
+        #region Todos los Generos 
 
         // Trae todos los generos
         [HttpGet]
@@ -32,10 +32,9 @@ namespace katio.API.Controllers
             var response = await _genreService.Index();
             return response.TotalElements > 0 ? Ok(response) : StatusCode(StatusCodes.Status404NotFound, response);
         }
-
         #endregion
 
-        #region Crear Genero → Eliminar → Actualizar 
+        #region Generos Literarios | Crear → Eliminar → Actualizar 
 
         [HttpPost]
         [Route("CreateGenre")]
@@ -45,7 +44,8 @@ namespace katio.API.Controllers
             return response.StatusCode == System.Net.HttpStatusCode.OK ? Ok(response) : StatusCode((int)response.StatusCode, response);
         }
 
-        [HttpDelete]
+
+         [HttpDelete]
         [Route("DeleteGenre")]
         public async Task<IActionResult> DeleteGenre(int id)
         {
@@ -61,19 +61,27 @@ namespace katio.API.Controllers
             return response != null ? Ok(response) : StatusCode(StatusCodes.Status404NotFound, response);
         }
 
-        
-
         #endregion
 
-        #region Busqueda por genero → Nombre → Descripcion 
+        #region Busqueda por generos literarios | Nombre → Id → Descripcion 
 
-        [HttpGet]
+         [HttpGet]
         [Route("GetGenresByName")]
         public async Task<IActionResult> GetGenresByName(string Name)
         {
             var response = await _genreService.GetGenresByName(Name);
             return response.TotalElements > 0 ? Ok(response) : StatusCode(StatusCodes.Status404NotFound, response);
         }
+
+        [HttpGet]
+        [Route("GetGenreById")]
+        public async Task<IActionResult> GetByGendreId(int Id)
+        {
+            var response = await _genreService.GetByGenreId(Id);
+            return response != null ? Ok(response) : StatusCode(StatusCodes.Status404NotFound, response);
+        }
+
+       
 
         [HttpGet]
         [Route("GetGenresByDescription")]

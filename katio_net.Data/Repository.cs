@@ -1,7 +1,6 @@
-﻿using katio.Data.Models;
+﻿using System.Linq.Expressions;
+using katio.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
-
 
 namespace katio.Data;
 
@@ -9,10 +8,10 @@ public class Repository<TId, TEntity> : IRepository<TId, TEntity>
 where TId : struct
 where TEntity : BaseEntity<TId>
 {
-    internal katioContext _context;
+    internal KatioContext _context;
     internal DbSet<TEntity> _dbSet;
 
-    public Repository(katioContext context)
+    public Repository(KatioContext context)
     {
         _context = context;
         _dbSet = context.Set<TEntity>();
@@ -22,7 +21,7 @@ where TEntity : BaseEntity<TId>
     {
         return await _dbSet.FindAsync(id);
     }
-   
+
     public virtual async Task AddAsync(TEntity entity)
     {
         await _dbSet.AddAsync(entity);
@@ -30,11 +29,12 @@ where TEntity : BaseEntity<TId>
 
     public virtual async Task Delete(TEntity entity)
     {
-        if(_context.Entry(entity).State == EntityState.Detached)
+        if (_context.Entry(entity).State == EntityState.Detached)
         {
             _dbSet.Attach(entity);
         }
         _dbSet.Remove(entity);
+        await _context.SaveChangesAsync();
     }
 
     public virtual async Task Delete(TId id)
@@ -47,23 +47,24 @@ where TEntity : BaseEntity<TId>
     {
         _dbSet.Attach(entity);
         _context.Entry(entity).State = EntityState.Modified;
+        await _context.SaveChangesAsync();
     }
 
-    public virtual async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderby = null, string includeProperties = "")
+    public virtual async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderby = null, string includeProperties = "")
     {
         IQueryable<TEntity> query = _dbSet;
-        if(filter is not null)
+        if (filter is not null)
         {
             query = query.Where(filter);
         }
 
         foreach (var includeProperty in includeProperties.Split(
-            new char[]{','}, StringSplitOptions.RemoveEmptyEntries))
+            new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
         {
             query = query.Include(includeProperty);
         }
 
-        if(orderby is not null)
+        if (orderby is not null)
         {
             return await orderby(query).ToListAsync();
         }
@@ -72,5 +73,5 @@ where TEntity : BaseEntity<TId>
             return await query.ToListAsync();
         }
     }
-   
+
 }

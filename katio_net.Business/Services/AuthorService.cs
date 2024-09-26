@@ -10,10 +10,11 @@ namespace katio.Business.Services;
 public class AuthorService : IAuthorService
 {
     // Lista de autores
-    private readonly katioContext _context;
+    private readonly KatioContext _context;
+    private readonly IUnitOfWork _unitOfWork;
 
     // Constructor
-    public AuthorService(katioContext context)
+    public AuthorService(KatioContext context)
     {
         _context = context;
     }
@@ -26,8 +27,17 @@ public class AuthorService : IAuthorService
             (HttpStatusCode.OK, BaseMessageStatus.OK_200, result) :
             Utilities.BuildResponse(HttpStatusCode.NotFound, BaseMessageStatus.BOOK_NOT_FOUND, new List<Author>());
     }
+    #region Get author by id
+    public async Task<BaseMessage<Author>> GetAuthorById(int id)
+    {
+        var author = await _unitOfWork.AuthorRepository.FindAsync(id);
+        return author != null ? Utilities.BuildResponse<Author>
+            (HttpStatusCode.OK, BaseMessageStatus.OK_200, new List<Author> { author }) :
+            Utilities.BuildResponse(HttpStatusCode.NotFound, BaseMessageStatus.AUTHOR_NOT_FOUND, new List<Author>());
+    }
+    #endregion
 
-    #region Crear Actualizar Eliminar
+    #region Author | Crear actualizar eliminar 
 
     // Crear Autores
     public async Task<BaseMessage<Author>> CreateAuthor(Author author)
@@ -81,7 +91,7 @@ public class AuthorService : IAuthorService
 
     #endregion
 
-    #region Find By Author
+    #region Busqueda por author
 
     // Traer los autores por nombre
     public async Task<BaseMessage<Author>> GetAuthorsByName(string name)

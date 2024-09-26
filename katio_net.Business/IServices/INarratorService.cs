@@ -3,11 +3,10 @@ using katio.Data.Models;
 
 namespace katio.Business.Interfaces;
 
-// Interfaz de Narrador con el servicio
-
 public interface INarratorService
 {
     Task<BaseMessage<Narrator>> Index();
+    Task<BaseMessage<Narrator>> GetNarratorById(int Id);
     Task<BaseMessage<Narrator>> GetNarratorsByName(string Name);
     Task<BaseMessage<Narrator>> GetNarratorsByLastName(string LastName);
     Task<BaseMessage<Narrator>> GetNarratorsByGenre(string Genre);

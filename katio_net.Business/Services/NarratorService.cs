@@ -11,13 +11,15 @@ namespace katio.Business.Services;
 public class NarratorService : INarratorService
 {
     // Lista de narradores
-    private readonly katioContext _context;
+    private readonly KatioContext _context;
+    private readonly IUnitOfWork _unitOfWork;
 
     // Constructor
-    public NarratorService(katioContext context)
+    public NarratorService(KatioContext context)
     {
         _context = context;
     }
+    
 
     // Traer todos los Narradores
     public async Task<BaseMessage<Narrator>> Index()
@@ -28,7 +30,7 @@ public class NarratorService : INarratorService
             Utilities.BuildResponse(HttpStatusCode.NotFound, BaseMessageStatus.BOOK_NOT_FOUND, new List<Narrator>());
     }
 
-    #region Create Update Delete
+    #region Narradores | Crear Actualizar Eliminar
 
     // Crear Narradores
     public async Task<BaseMessage<Narrator>> CreateNarrator(Narrator narrator)
@@ -81,7 +83,16 @@ public class NarratorService : INarratorService
 
     #endregion
 
-    #region  Find By Narrator
+    #region  Busqueda por narrador
+    //Buscar narrador por Id
+    public async Task<BaseMessage<Narrator>> GetNarratorById(int id)
+    {
+        var result = await _unitOfWork.NarratorRepository.FindAsync(id);
+        return result != null ? Utilities.BuildResponse<Narrator>
+            (HttpStatusCode.OK, BaseMessageStatus.OK_200, new List<Narrator> { result }) :
+            Utilities.BuildResponse(HttpStatusCode.NotFound, BaseMessageStatus.BOOK_NOT_FOUND, new List<Narrator>());
+    
+    }
 
     // Buscar Narradores por Nombre
     public async Task<BaseMessage<Narrator>> GetNarratorsByName(string name)
