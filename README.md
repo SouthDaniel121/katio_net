@@ -24,6 +24,7 @@ Un proyecto basado en una bibloteca virtual dedicado para los usuarios en zonas 
 
 - [x] Crear un libro.
 - [x] Editar un libro.
+- [x] Buscar por id
 - [x] Buscar libro por nombre, de forma relativa.
 - [x] Buscar libro por autor, de forma relativa, por nombre y apellido del autor.
 - [x] Buscar libro por editorial.
@@ -41,6 +42,7 @@ Un proyecto basado en una bibloteca virtual dedicado para los usuarios en zonas 
 ### Autores
 
 - [x] Crear un Autor
+- [x] Buscar por id
 - [x] Editar un Autor
 - [x] Buscar un autor por nombre y apellido de forma relativa.
 - [x] Buscar un autor por fecha de nacimiento
@@ -63,6 +65,7 @@ Un proyecto basado en una bibloteca virtual dedicado para los usuarios en zonas 
 
 - [x] Crear un audiolibro.
 - [x] Editar un audiolibro.
+- [x] Buscar por id
 - [x] Buscar Audiolibro por nombre, de forma relativa.
 - [x] Buscar Audiolibro por autor, de forma relativa, por nombre y apellido del autor.
 - [x] Buscar Audiolibro por editorial.
@@ -84,6 +87,7 @@ Un proyecto basado en una bibloteca virtual dedicado para los usuarios en zonas 
 
 - [x] Crear un narrador
 - [x] Editar un narrador
+- [x] Buscar por id
 - [x] Buscar narrador por nombre.
 - [ ] Buscar narrador por perfil de voz.
 - [ ] Buscar todos los audiolibros de un narradores por relación.
