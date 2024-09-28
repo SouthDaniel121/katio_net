@@ -1,6 +1,7 @@
-# Proyecto Backend Katio en Csharp-Biblioteca Digital Secretos Para Contar 
+# Proyecto Backend Katio en Csharp,
+# Biblioteca Digital Secretos Para Contar.
 
-## Proyecto FrontEnd [`Katio_Verso`](https://github.com/SouthDaniel121/katio_verso).
+## Proyecto FrontEnd  [`Katio_Verso`](https://github.com/SouthDaniel121/katio_verso)
 
 
 ## Informacion 
@@ -9,7 +10,7 @@ Un proyecto basado en una bibloteca virtual dedicado para los usuarios en zonas 
 
 ## Versiones
 
-- Version 1 en Java [`Katio_Jardin`](https://github.com/SouthDaniel121/katio-Jardin).
+- Version 1 en Java [`Katio_Jardin`](https://github.com/SouthDaniel121/katio-Jardin)
 
 - Version 1.5 en C# (Actual)
 
