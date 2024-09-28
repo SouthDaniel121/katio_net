@@ -1,23 +1,26 @@
-# Biblioteca Digital Secretos Para Contar 
+# Proyecto Backend Katio en Csharp-Biblioteca Digital Secretos Para Contar 
 
-## Project Katio C#
+## Proyecto FrontEnd [`Katio_Verso`](https://github.com/SouthDaniel121/katio_verso).
+
+
+## Informacion 
 
 Un proyecto basado en una bibloteca virtual dedicado para los usuarios en zonas rurales de antioquia principalmente con los libros y colecciones de Fundacion secretos para contar.
 
-## Version
+## Versiones
 
-- Version 1 en Java
+- Version 1 en Java [`Katio_Jardin`](https://github.com/SouthDaniel121/katio-Jardin).
 
 - Version 1.5 en C# (Actual)
 
 
 ## Equipo
 
-→ Alejandro Buitrago
+` → Alejandro Buitrago `
 
-→ Santiago Muñoz
+` → Santiago Muñoz `
 
-→ J Daniel Orrego
+` → J Daniel Orrego `
 
 
 ### Libros
