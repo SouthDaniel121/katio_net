@@ -9,21 +9,21 @@ Un proyecto basado en una bibloteca virtual dedicado para los usuarios en zonas 
 
 ## Versiones
 
-- Version 1 en Java [`Katio_Jardin`](https://github.com/SouthDaniel121/katio-Jardin)
+- Version 1 en Java → [`Katio_Jardin`](https://github.com/SouthDaniel121/katio-Jardin)
 
 - Version 1.5 en C# (Actual)
 
 
 ## Equipo
 
-- `Alejandro Buitrago `
-- `Santiago Muñoz `
-- `J Daniel Orrego `
+`Alejandro Buitrago `
+`Santiago Muñoz `
+`J Daniel Orrego `
 
 
 ## Start-up
 
-Primero, ejecute el servidor de desarrollo. (CMD):
+Primero, ejecute el servidor de desarrollo (CMD):
 
 ```bash
  dotnet watch --project Katio_net.API
