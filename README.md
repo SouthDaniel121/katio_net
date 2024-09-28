@@ -1,4 +1,3 @@
-# Proyecto Backend Katio en Csharp,
 # Biblioteca Digital Secretos Para Contar.
 
 ## Proyecto FrontEnd  [`Katio_Verso`](https://github.com/SouthDaniel121/katio_verso)
@@ -17,11 +16,19 @@ Un proyecto basado en una bibloteca virtual dedicado para los usuarios en zonas 
 
 ## Equipo
 
-` → Alejandro Buitrago `
+- `Alejandro Buitrago `
+- `Santiago Muñoz `
+- `J Daniel Orrego `
 
-` → Santiago Muñoz `
 
-` → J Daniel Orrego `
+## Start-up
+
+Primero, ejecute el servidor de desarrollo. (CMD):
+
+```bash
+ dotnet watch --project Katio_net.API
+```
+ 
 
 
 ### Libros
