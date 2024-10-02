@@ -20,7 +20,7 @@ Un proyecto basado en una bibloteca virtual dedicado para los usuarios en zonas 
 
 ## Start-up
 
-Primero, ejecute el servidor de desarrollo (CMD):
+Primero, ejecute el servidor de desarrollo (CMD o PowerShell):
 
 ```bash
  dotnet watch --project Katio_net.API
