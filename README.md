@@ -1,8 +1,5 @@
 # Biblioteca Digital Secretos Para Contar.
 
-## Proyecto FrontEnd  [`Katio_Verso`](https://github.com/SouthDaniel121/katio_verso)
-
-
 ## Informacion 
 
 Un proyecto basado en una bibloteca virtual dedicado para los usuarios en zonas rurales de antioquia principalmente con los libros y colecciones de Fundacion secretos para contar.
