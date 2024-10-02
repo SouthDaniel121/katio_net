@@ -27,7 +27,7 @@ public class AuthorService : IAuthorService
             (HttpStatusCode.OK, BaseMessageStatus.OK_200, result) :
             Utilities.BuildResponse(HttpStatusCode.NotFound, BaseMessageStatus.BOOK_NOT_FOUND, new List<Author>());
     }
-    #region Get author by id
+    #region Traer por id
     public async Task<BaseMessage<Author>> GetAuthorById(int id)
     {
         var author = await _unitOfWork.AuthorRepository.FindAsync(id);
@@ -96,7 +96,9 @@ public class AuthorService : IAuthorService
     // Traer los autores por nombre
     public async Task<BaseMessage<Author>> GetAuthorsByName(string name)
     {
-        var result = await _context.Authors.Where(b => b.Name.Contains(name, StringComparison.InvariantCultureIgnoreCase)).ToListAsync();
+          var result = await _context.Authors
+        .Where(b => b.Name.ToLower() == name.ToLower())
+        .ToListAsync();
         return result.Any() ? Utilities.BuildResponse<Author>
             (HttpStatusCode.OK, BaseMessageStatus.OK_200, result) :
             Utilities.BuildResponse(HttpStatusCode.NotFound, BaseMessageStatus.BOOK_NOT_FOUND, new List<Author>());
@@ -104,7 +106,9 @@ public class AuthorService : IAuthorService
     // Traer los autores por apellido
     public async Task<BaseMessage<Author>> GetAuthorsByLastName(string LastName)
     {
-        var result = await _context.Authors.Where(b => b.LastName.Contains(LastName, StringComparison.InvariantCultureIgnoreCase)).ToListAsync();
+        var result = await _context.Authors
+        .Where(b => b.LastName.ToLower() == LastName.ToLower())
+        .ToListAsync();
         return result.Any() ? Utilities.BuildResponse<Author>
             (HttpStatusCode.OK, BaseMessageStatus.OK_200, result) :
             Utilities.BuildResponse(HttpStatusCode.NotFound, BaseMessageStatus.BOOK_NOT_FOUND, new List<Author>());
@@ -112,7 +116,9 @@ public class AuthorService : IAuthorService
     // Traer los autores por pais - region
     public async Task<BaseMessage<Author>> GetAuthorsByCountry(string Country)
     {
-        var result = await _context.Authors.Where(b => b.Country.Contains(Country, StringComparison.InvariantCultureIgnoreCase)).ToListAsync();
+        var result = await _context.Authors
+        .Where(b => b.Country.ToLower() == Country.ToLower())
+        .ToListAsync();
         return result.Any() ? Utilities.BuildResponse<Author>
             (HttpStatusCode.OK, BaseMessageStatus.OK_200, result) :
             Utilities.BuildResponse(HttpStatusCode.NotFound, BaseMessageStatus.BOOK_NOT_FOUND, new List<Author>());
