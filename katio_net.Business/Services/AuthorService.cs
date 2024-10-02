@@ -9,7 +9,7 @@ namespace katio.Business.Services;
 
 public class AuthorService : IAuthorService
 {
-    // Lista de autores
+    // Lista de los autores
     private readonly KatioContext _context;
     private readonly IUnitOfWork _unitOfWork;
 
