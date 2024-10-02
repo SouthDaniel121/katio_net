@@ -26,7 +26,7 @@ public class BookService : IBookService
             Utilities.BuildResponse(HttpStatusCode.NotFound, BaseMessageStatus.BOOK_NOT_FOUND, new List<Book>());
     }
 
-    #region Create Update Delete
+    #region Crear → Eliminar → Actualizar
 
     // Crear un Libro
     public async Task<BaseMessage<Book>> CreateBook(Book book)
@@ -99,7 +99,8 @@ public class BookService : IBookService
 
     #endregion
 
-    #region Busqueda por book
+    #region Busqueda por libro
+    
     // Traer libros por id
     public async Task<BaseMessage<Book>> GetBookById(int id)
     {
@@ -112,7 +113,7 @@ public class BookService : IBookService
     // Traer libros por nombre
     public async Task<BaseMessage<Book>> GetBooksByName(string name)
     {
-        var result = await _unitOfWork.BookRepository.GetAllAsync(b => b.Name.Contains(name, StringComparison.InvariantCultureIgnoreCase));
+        var result = await _unitOfWork.BookRepository.GetAllAsync(b => b.Name.ToLower() == name.ToLower());
         //return result;
         return result.Any() ? Utilities.BuildResponse<Book>
             (HttpStatusCode.OK, BaseMessageStatus.OK_200, result) :
