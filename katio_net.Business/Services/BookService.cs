@@ -150,7 +150,7 @@ public class BookService : IBookService
     // Traer libros por edición
     public async Task<BaseMessage<Book>> GetBooksByEdition(string edition)
     {
-        var result = await _unitOfWork.BookRepository.GetAllAsync(b => b.Edition.Contains(edition, StringComparison.InvariantCultureIgnoreCase));
+        var result = await _unitOfWork.BookRepository.GetAllAsync(b => b.Edition.ToLower() == b.Edition.ToLower());
         return result.Any() ? Utilities.BuildResponse<Book>
             (HttpStatusCode.OK, BaseMessageStatus.OK_200, result) :
             Utilities.BuildResponse(HttpStatusCode.NotFound, BaseMessageStatus.BOOK_NOT_FOUND, new List<Book>());
