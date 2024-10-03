@@ -8,7 +8,7 @@ Un proyecto basado en una bibloteca virtual dedicado para los usuarios en zonas 
 
 - Version 1 en Java → [`Katio_Jardin`](https://github.com/SouthDaniel121/katio-Jardin)
 
-- Version 1.5 en C# (Actual)
+- Version 1.5 en Csharp `(Actual)`
 
 
 ## Equipo
