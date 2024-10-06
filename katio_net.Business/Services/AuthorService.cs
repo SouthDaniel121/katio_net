@@ -96,9 +96,7 @@ public class AuthorService : IAuthorService
     // Traer los autores por nombre
     public async Task<BaseMessage<Author>> GetAuthorsByName(string name)
     {
-          var result = await _context.Authors
-        .Where(b => b.Name.ToLower() == name.ToLower())
-        .ToListAsync();
+          var result = await _context.Authors.Where(b => b.Name.ToLower() == name.ToLower())  .ToListAsync();
         return result.Any() ? Utilities.BuildResponse<Author>
             (HttpStatusCode.OK, BaseMessageStatus.OK_200, result) :
             Utilities.BuildResponse(HttpStatusCode.NotFound, BaseMessageStatus.BOOK_NOT_FOUND, new List<Author>());
