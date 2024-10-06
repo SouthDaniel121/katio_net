@@ -30,7 +30,7 @@ public class AudioBookService : IAudioBookService
             Utilities.BuildResponse(HttpStatusCode.NotFound, BaseMessageStatus.AUDIOBOOK_NOT_FOUND, new List<AudioBook>());
     }
 
-    #region Create Update Delete
+    #region Crear → Actualizar → Eliminar
     // Crear un Audiolibro
     public async Task<BaseMessage<AudioBook>> CreateAudioBook(AudioBook audioBook)
     {
@@ -93,6 +93,7 @@ public class AudioBookService : IAudioBookService
     #endregion
 
     #region Busqueda por libro
+    
     // Buscar por id
     public async Task<BaseMessage<AudioBook>> GetAudioBookById(int id)
     {
@@ -133,7 +134,7 @@ public class AudioBookService : IAudioBookService
             Utilities.BuildResponse(HttpStatusCode.NotFound, BaseMessageStatus.AUDIOBOOK_NOT_FOUND, new List<AudioBook>());
     }
 
-    // Buscar por Edición
+    // Buscar por Edición -- Falla al buscar la edicion
     public async Task<BaseMessage<AudioBook>> GetByAudioBookEdition(string edition)
     {
         var result = await _context.AudioBooks.Where(b => b.Edition.Contains(edition, StringComparison.InvariantCultureIgnoreCase)).ToListAsync();
