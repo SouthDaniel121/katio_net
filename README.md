@@ -4,11 +4,15 @@
 
 Un proyecto basado en una bibloteca virtual dedicado para los usuarios en zonas rurales de antioquia principalmente con los libros y colecciones de Fundacion secretos para contar.
 
-## Versiones
+## Version FrontEnd
+
+[`Katio_Verso`](https://github.com/SouthDaniel121/katio_verso)  `(Actual)`
+
+## Version Backend
 
 - Version 1 en Java → [`Katio_Jardin`](https://github.com/SouthDaniel121/katio-Jardin)
 
-- Version 1.5 en Csharp `(Actual)`
+- Version 1.5 en Csharp → `(Actual)`
 
 
 ## Equipo
@@ -27,6 +31,8 @@ Primero, ejecute el servidor de desarrollo (CMD o PowerShell):
 ```
  
 
+
+## ↓ ¿ Qué tiene la aplicación ? ↓
 
 ### Libros
 
