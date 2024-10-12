@@ -11,7 +11,7 @@ namespace katio.API.Controllerss
 
         #region Servicio y Contructor
     
-        // Servicio de Audiolibros
+        // Servicio de Audiolibros conectado con la interfaz
 
         private readonly IAudioBookService _audioBookService;
 
