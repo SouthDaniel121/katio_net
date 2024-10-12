@@ -5,11 +5,20 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Create DataBase
+// Crear Base De Datos
 builder.Services.AddDbContext<KatioContext>(
     opt => opt.UseNpgsql(builder.Configuration.GetConnectionString("KatioDBPSQL")));
 
-// Add services to the container.
+//Para cualquier navegador
+builder.Services.AddCors(options => {
+    options.AddPolicy(name: "KatioRules", builder => {
+        builder.AllowCredentials();
+        builder.AllowAnyMethod();
+        builder.AllowAnyOrigin();
+    });
+});
+
+// Agregar servicios al container
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -23,7 +32,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configuracion HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
