@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "katio_net.Business", "katio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "katio_net.Data", "katio_net.Data\katio_net.Data.csproj", "{B8DFDDA5-6A0E-4557-93BA-50CCBADB7132}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{DC6147E9-CCF8-4746-80D9-59DF535213F0}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Katio_Net.Tests", "Katio_Net.Tests", "{DC6147E9-CCF8-4746-80D9-59DF535213F0}"
 	ProjectSection(SolutionItems) = preProject
 		Katio_Net.Test\AudioBookTests.cs = Katio_Net.Test\AudioBookTests.cs
 		Katio_Net.Test\AuthorTests.cs = Katio_Net.Test\AuthorTests.cs
