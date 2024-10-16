@@ -16,6 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Katio_Net.Tests", "Katio_Ne
 		Katio_Net.Test\BookTest.cs = Katio_Net.Test\BookTest.cs
 		Katio_Net.Test\GenreTest.cs = Katio_Net.Test\GenreTest.cs
 		Katio_Net.Test\NarratorTest.cs = Katio_Net.Test\NarratorTest.cs
+		Katio_Net.Test\Katio_net.Test.csproj = Katio_Net.Test\Katio_net.Test.csproj
 	EndProjectSection
 EndProject
 Global
