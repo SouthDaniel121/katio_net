@@ -9,15 +9,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<KatioContext>(
     opt => opt.UseNpgsql(builder.Configuration.GetConnectionString("KatioDBPSQL")));
 
-//Para cualquier navegador
-builder.Services.AddCors(options => {
-    options.AddPolicy(name: "KatioRules", builder => {
-        builder.AllowCredentials();
-        builder.AllowAnyMethod();
-        builder.AllowAnyOrigin();
-    });
-});
-
 // Agregar servicios al container
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -60,7 +51,7 @@ async void PopulateDB(WebApplication app)
         await AuthorService.CreateAuthor(new katio.Data.Models.Author
         {
             Name = "Gabriel",
-            LastName = "Garcia Marquez",
+            LastName = "García Márquez",
             Country = "Colombia",
             BirthDate = new DateOnly(1940, 03, 03)
         });
@@ -75,7 +66,7 @@ async void PopulateDB(WebApplication app)
 
         await AuthorService.CreateAuthor(new katio.Data.Models.Author
         {
-            Name = "German",
+            Name = "Germán",
             LastName = "Castro-Caycedo",
             Country = "Colombia",
             BirthDate = new DateOnly(1940, 03, 03)
@@ -84,8 +75,8 @@ async void PopulateDB(WebApplication app)
         await AuthorService.CreateAuthor(new katio.Data.Models.Author
         {
             Name = "Silvia",
-            LastName = "Moreno Garcia",
-            Country = "Mexico",
+            LastName = "Moreno García",
+            Country = "México",
             BirthDate = new DateOnly(1981, 04, 25)
         });
 
@@ -453,7 +444,7 @@ async void PopulateDB(WebApplication app)
         });
         await bookService.CreateBook(new katio.Data.Models.Book
         {
-            Name = "Memorias de un sinverguenza de siete suelas",
+            Name = "Memorias de un sinvergüenza de siete suelas",
             ISBN10 = "9504932611",
             ISBN13 = "978-9504932611",
             Published = new DateOnly(2012, 01, 01),
@@ -785,8 +776,8 @@ async void PopulateDB(WebApplication app)
             Edition = "RAE Obra Académica",
             Genre = "Ficcion",
             LenghtInSeconds = 1,
-            Path = "C:/Users/Usuario/Downloads/Cien a�os de soledad.mp3",
-            AuthorId = 1
+            Path = "C:/Users/Usuario/Downloads/Cien años de soledad.mp3",
+            NarratorId = 1
         });
         await AudioBookService.CreateAudioBook(new katio.Data.Models.AudioBook
         {
@@ -799,7 +790,7 @@ async void PopulateDB(WebApplication app)
             Genre = "Ficcion",
             LenghtInSeconds = 10,
             Path = "C:/Users/Usuario/Downloads/Huellas.mp3",
-            AuthorId = 3
+            NarratorId = 3
         });
         await AudioBookService.CreateAudioBook(new katio.Data.Models.AudioBook
         {
@@ -812,7 +803,7 @@ async void PopulateDB(WebApplication app)
             Genre = "Ficcion",
             LenghtInSeconds = 20,
             Path = "C:/Users/Usuario/Downloads/Maria.mp3",
-            AuthorId = 2
+            NarratorId = 2
         });
         await AudioBookService.CreateAudioBook(new katio.Data.Models.AudioBook
         {
@@ -825,7 +816,7 @@ async void PopulateDB(WebApplication app)
             Genre = "Ficcion",
             LenghtInSeconds = 30,
             Path = "C:/Users/Usuario/Downloads/Mexico Gothic.mp3",
-            AuthorId = 4
+            NarratorId = 4
         });
 
         #endregion
