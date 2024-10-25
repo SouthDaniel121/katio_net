@@ -1,4 +1,4 @@
-using NSubstitute;
+﻿using NSubstitute;
 using katio.Data;
 using katio.Data.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -9,7 +9,6 @@ using katio.Data.Dto;
 using System.Net;
 
 namespace katio.Test;
-    
 //Crear El test con la clase
 [TestClass]
 public class AudioBookTests
@@ -38,7 +37,7 @@ public class AudioBookTests
                 Edition = "RAE Obra Académica",
                 Genre = "Ficcion",
                 LenghtInSeconds = 1,
-                Path = "C:/Users/Usuario/Downloads/Cien a�os de soledad.mp3",
+                Path = "C:/Users/Downloads/Cien años de soledad.mp3",
                 NarratorId = 1
             },
             new AudioBook
@@ -71,5 +70,91 @@ public class AudioBookTests
         // Assert
         Assert.IsNotNull(result);
         Assert.AreEqual(2, result.ResponseElements.Count());
+    }
+
+
+    // Test para traer audiolibros por id 
+    [TestMethod]
+    public async Task GetAudioBookById()
+    {
+        // Arrange
+        var audioBook = _audioBooks.First();
+        _audioBookRepository.FindAsync(audioBook.Id).Returns(audioBook);
+
+        // Act
+        var result = await _audioBookService.GetAudioBookById(audioBook.Id);
+
+        // Assert
+        Assert.IsNotNull(result);
+        Assert.AreEqual(audioBook.Name, result.ResponseElements.First().Name);
+    }
+
+
+    // Test para traer AudioLibro por nombre  
+    [TestMethod]
+    public async Task GetAudioBookByName()
+    {
+        // Arrange
+        var audioBook = _audioBooks.First();
+        _audioBookRepository.GetAllAsync(Arg.Any<Expression<Func<AudioBook, bool>>>()).Returns(new List<AudioBook> { audioBook });
+
+        // Act
+        var result = await _audioBookService.GetByAudioBookName(audioBook.Name);
+
+        // Assert
+        Assert.IsNotNull(result);
+        Assert.AreEqual(audioBook.Name, result.ResponseElements.First().Name);
+    }
+
+
+
+    // Repositorio excepción 
+    // Test para traer todos los audiolibros excepción
+    [TestMethod]
+    public async Task GetAllAudioBooksRepositoryException()
+    {
+        // Arrange
+        _audioBookRepository.When(x => x.GetAllAsync()).Do(x => throw new Exception());
+
+        // Act
+        var result = await _audioBookService.Index();
+
+        // Assert
+        Assert.IsNotNull(result);
+        Assert.AreEqual(HttpStatusCode.InternalServerError, result.StatusCode);
+    }
+
+
+    // Test para traer audioLibro por id repositorio  repositorio excepción
+    [TestMethod]
+    public async Task GetAudioBookByIdRepositoryException()
+    {
+        // Arrange
+        var audioBook = _audioBooks.First();
+        _audioBookRepository.When(x => x.FindAsync(audioBook.Id)).Do(x => throw new Exception());
+
+        // Act
+        var result = await _audioBookService.GetAudioBookById(audioBook.Id);
+
+        // Assert
+        Assert.IsNotNull(result);
+        Assert.AreEqual(HttpStatusCode.InternalServerError, result.StatusCode);
+    }
+
+
+    // Test traer Audiolibro por nombre  excepción-
+    [TestMethod]
+    public async Task GetAudioBookByNameRepositoryException()
+    {
+        // Arrange
+        var audioBook = _audioBooks.First();
+        _audioBookRepository.When(x => x.GetAllAsync(Arg.Any<Expression<Func<AudioBook, bool>>>())).Do(x => throw new Exception());
+
+        // Act
+        var result = await _audioBookService.GetByAudioBookName(audioBook.Name);
+
+        // Assert
+        Assert.IsNotNull(result);
+        Assert.AreEqual(HttpStatusCode.InternalServerError, result.StatusCode);
     }
 }
