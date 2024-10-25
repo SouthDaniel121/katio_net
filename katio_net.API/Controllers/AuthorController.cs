@@ -10,7 +10,7 @@ namespace katio.API.Controllers
     {
 
 
-        #region  Servicio y Contructor 
+     #region  Servicio y Contructor 
 
         // Servicio de autores
         private readonly IAuthorService _authorService;
@@ -21,9 +21,14 @@ namespace katio.API.Controllers
             _authorService = authorService;
         }
 
-        #endregion
+
+
+   #endregion
 
         #region  Todos los autores 
+
+
+
 
         // Trae todos los autores
         [HttpGet]
@@ -39,15 +44,24 @@ namespace katio.API.Controllers
         #region  Autores | Crear → Eliminar → Actualizar  
 
         // Crear Autores ↓
-        [HttpPost]
+        [HttpPut]
         [Route("CreateAuthor")]
         public async Task<IActionResult> CreateAuthor(Author author)
         {
             var response = await _authorService.CreateAuthor(author);
             return response.StatusCode == System.Net.HttpStatusCode.OK ? Ok(response) : StatusCode((int)response.StatusCode, response);
         }
- 
-         // Eliminar un Autor ↓
+
+        // Actualizar Autores ↓
+        [HttpPost]
+        [Route("UpdateAuthor")]
+        public async Task<IActionResult> UpdateAuthor(Author author)
+        {
+            var response = await _authorService.UpdateAuthor(author);
+            return response != null ? Ok(response) : StatusCode(StatusCodes.Status404NotFound, response);
+        }
+
+        // Elimina un Autor ↓
         [HttpDelete]
         [Route("DeleteAuthor")]
         public async Task<IActionResult> DeleteAuthor(int id)
@@ -56,18 +70,18 @@ namespace katio.API.Controllers
             return response.StatusCode == System.Net.HttpStatusCode.OK ? Ok(response) : StatusCode((int)response.StatusCode, response);
         }
 
-        // Actualizar Autores ↓
-        [HttpPut]
-        [Route("UpdateAuthor")]
-        public async Task<IActionResult> UpdateAuthor(Author author)
-        {
-            var response = await _authorService.UpdateAuthor(author);
-            return response != null ? Ok(response) : StatusCode(StatusCodes.Status404NotFound, response);
-        }
-
         #endregion
 
-        #region Busqueda por autor | Nombre → Apellido → Id → Pais → Fecha de nacimiento  
+              #region Busqueda por autor | Nombre → Apellido → Id → Pais → Fecha de nacimiento  
+
+        // Trae un Autor por su Id
+        [HttpGet]
+        [Route("GetAuthorById")]
+        public async Task<IActionResult> GetAuthorById(int Id)
+        {
+            var author = await _authorService.GetAuthorById(Id);
+            return author != null ? Ok(author) : StatusCode(StatusCodes.Status404NotFound, author);
+        }
 
         // Trae un autor por su nombre
         [HttpGet]
@@ -87,18 +101,7 @@ namespace katio.API.Controllers
             return response != null ? Ok(response) : StatusCode(StatusCodes.Status404NotFound, response);
         }
 
-        
-        // Trae un Autor por su Id
-        [HttpGet]
-        [Route("GetAuthorById")]
-        public async Task<IActionResult> GetAuthorById(int Id)
-        {
-            var author = await _authorService.GetAuthorById(Id);
-            return author != null ? Ok(author) : StatusCode(StatusCodes.Status404NotFound, author);
-        }
-
-
-          // Trae un autor por su pais 
+        // Trae un autor por su pais
         [HttpGet]
         [Route("GetAuthorByCountry")]
         public async Task<IActionResult> GetAuthorByCountry(string country)

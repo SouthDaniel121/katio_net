@@ -20,10 +20,12 @@ namespace katio.API.Controllers
             _narratorService = narratorService;
         }
 
+
         #endregion
 
 
         #region Todos los narradores 
+
 
         // Trae todos los narradores
         [HttpGet]
@@ -34,17 +36,27 @@ namespace katio.API.Controllers
             return response.TotalElements > 0 ? Ok(response) : StatusCode(StatusCodes.Status404NotFound, response);
         }
 
+
         #endregion
 
         #region Narradores | Crear →  Eliminar → Actualizar  
 
         // Crear Narradores
-        [HttpPost]
+        [HttpPut]
         [Route("CreateNarrator")]
         public async Task<IActionResult> CreateNarrator(Narrator narrator)
         {
             var response = await _narratorService.CreateNarrator(narrator);
             return response.StatusCode == System.Net.HttpStatusCode.OK ? Ok(response) : StatusCode((int)response.StatusCode, response);
+        }
+
+        // Actualizar Narradores
+        [HttpPost]
+        [Route("UpdateNarrator")]
+        public async Task<IActionResult> UpdateNarrator(Narrator narrator)
+        {
+            var response = await _narratorService.UpdateNarrator(narrator);
+            return response != null ? Ok(response) : StatusCode(StatusCodes.Status404NotFound, response);
         }
 
         // Elimina un Narrador
@@ -56,19 +68,18 @@ namespace katio.API.Controllers
             return response.StatusCode == System.Net.HttpStatusCode.OK ? Ok(response) : StatusCode((int)response.StatusCode, response);
         }
 
-        // Actualizar Narradores
-        [HttpPut]
-        [Route("UpdateNarrator")]
-        public async Task<IActionResult> UpdateNarrator(Narrator narrator)
-        {
-            var response = await _narratorService.UpdateNarrator(narrator);
-            return response != null ? Ok(response) : StatusCode(StatusCodes.Status404NotFound, response);
-        }
-
         #endregion
 
         #region Busqueda por autor | Nombre → Apellido → Id → Genero literario 
 
+        // Trae un narrador por su id
+        [HttpGet]
+        [Route("GetNarratorById")]
+        public async Task<IActionResult> GetNarratorById(int Id)
+        {
+            var response = await _narratorService.GetNarratorById(Id);
+            return response != null ? Ok(response) : StatusCode(StatusCodes.Status404NotFound, response);
+        }
 
         // Trae un narrador por su Nombre
         [HttpGet]
@@ -87,16 +98,6 @@ namespace katio.API.Controllers
             var response = await _narratorService.GetNarratorsByLastName(lastName);
             return response.TotalElements > 0 ? Ok(response) : StatusCode(StatusCodes.Status404NotFound, response);
         }
-
-        // Trae un narrador por su id
-        [HttpGet]
-        [Route("GetNarratorById")]
-        public async Task<IActionResult> GetNarratorById(int Id)
-        {
-            var response = await _narratorService.GetNarratorById(Id);
-            return response != null ? Ok(response) : StatusCode(StatusCodes.Status404NotFound, response);
-        }
-
 
         // Trae un narrador por su Genero literario
         [HttpGet]

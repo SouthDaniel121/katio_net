@@ -20,7 +20,7 @@ namespace katio.API.Controllers
             _genreService = genreService;
         }
 
-        #endregion
+ #endregion
 
         #region Todos los Generos 
 
@@ -32,11 +32,11 @@ namespace katio.API.Controllers
             var response = await _genreService.Index();
             return response.TotalElements > 0 ? Ok(response) : StatusCode(StatusCodes.Status404NotFound, response);
         }
-        #endregion
+         #endregion
 
         #region Generos Literarios | Crear → Eliminar → Actualizar 
 
-        [HttpPost]
+        [HttpPut]
         [Route("CreateGenre")]
         public async Task<IActionResult> CreateGenre(Genre genre)
         {
@@ -44,16 +44,7 @@ namespace katio.API.Controllers
             return response.StatusCode == System.Net.HttpStatusCode.OK ? Ok(response) : StatusCode((int)response.StatusCode, response);
         }
 
-
-         [HttpDelete]
-        [Route("DeleteGenre")]
-        public async Task<IActionResult> DeleteGenre(int id)
-        {
-            var response = await _genreService.DeleteGenre(id);
-            return response.StatusCode == System.Net.HttpStatusCode.OK ? Ok(response) : StatusCode((int)response.StatusCode, response);
-        }
-
-        [HttpPut]
+        [HttpPost]
         [Route("UpdateGenre")]
         public async Task<IActionResult> UpdateGenre(Genre genre)
         {
@@ -61,17 +52,17 @@ namespace katio.API.Controllers
             return response != null ? Ok(response) : StatusCode(StatusCodes.Status404NotFound, response);
         }
 
+        [HttpDelete]
+        [Route("DeleteGenre")]
+        public async Task<IActionResult> DeleteGenre(int id)
+        {
+            var response = await _genreService.DeleteGenre(id);
+            return response.StatusCode == System.Net.HttpStatusCode.OK ? Ok(response) : StatusCode((int)response.StatusCode, response);
+        }
+
         #endregion
 
-        #region Busqueda por generos literarios | Nombre → Id → Descripcion 
-
-         [HttpGet]
-        [Route("GetGenresByName")]
-        public async Task<IActionResult> GetGenresByName(string Name)
-        {
-            var response = await _genreService.GetGenresByName(Name);
-            return response.TotalElements > 0 ? Ok(response) : StatusCode(StatusCodes.Status404NotFound, response);
-        }
+          #region Busqueda por generos literarios | Nombre → Id → Descripcion 
 
         [HttpGet]
         [Route("GetGenreById")]
@@ -81,7 +72,13 @@ namespace katio.API.Controllers
             return response != null ? Ok(response) : StatusCode(StatusCodes.Status404NotFound, response);
         }
 
-       
+        [HttpGet]
+        [Route("GetGenresByName")]
+        public async Task<IActionResult> GetGenresByName(string Name)
+        {
+            var response = await _genreService.GetGenresByName(Name);
+            return response.TotalElements > 0 ? Ok(response) : StatusCode(StatusCodes.Status404NotFound, response);
+        }
 
         [HttpGet]
         [Route("GetGenresByDescription")]
