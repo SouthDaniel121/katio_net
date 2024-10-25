@@ -12,10 +12,9 @@ public class KatioContext : DbContext
 
     public DbSet<Book> Books { get; set; } = null;
     public DbSet<Author> Authors { get; set; } = null;
-
+    public DbSet<Narrator> Narrators { get; set; } = null;
     public DbSet<Genre> Genres { get; set; } = null;
     public DbSet<AudioBook> AudioBooks { get; set; } = null;
-    public DbSet<Narrator> Narrators { get; set; } = null;
 
 
 
