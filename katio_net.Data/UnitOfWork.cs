@@ -13,6 +13,8 @@ public class UnitOfWork : IUnitOfWork, IDisposable
     private IRepository<int, AudioBook> _audioBookRepository;
     private IRepository<int, Genre> _genreRepository;
     private IRepository<int, Narrator> _narratorRepository;
+    private Repository<int, User> _userRepository;
+
 
     public UnitOfWork(KatioContext context)
     {
@@ -60,6 +62,15 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         {
             _narratorRepository ??= new Repository<int, Narrator>(_context);
             return _narratorRepository;
+        }
+    }
+
+      public IRepository<int, User> UserRepository
+    {
+        get
+        {
+            _userRepository ??= new Repository<int, User>(_context);
+            return _userRepository;
         }
     }
 

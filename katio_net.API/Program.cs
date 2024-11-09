@@ -2,6 +2,7 @@ using katio.Business.Services;
 using katio.Business.Interfaces;
 using katio.Data;
 using Microsoft.EntityFrameworkCore;
+using katio.Data.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,8 @@ builder.Services.AddScoped<INarratorService, NarratorService>();
 builder.Services.AddScoped<IGenreService, GenreService>();
 builder.Services.AddScoped<IAudioBookService, AudioBookService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IUserService, UserService>();
+
 
 var app = builder.Build();
 
@@ -30,7 +33,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-//PopulateDB(app);
+PopulateDB(app);
 
 app.UseHttpsRedirection();
 
@@ -820,6 +823,58 @@ async void PopulateDB(WebApplication app)
         });
 
         #endregion
+    
+        
+        // Tabla de User 
+        #region User service
+
+             var UserService = scope.ServiceProvider.GetService<IUserService>();
+        await UserService.CreateUser(new katio.Data.Models.User
+        {
+            Id = 1,
+            Nombre = "Maria Camila",
+            Apellido = "Gil Rojas",
+            Email = "cami@gmail.com",
+            Telefono = "3015822126",
+            Password = "1234",
+            Identificacion = "10333658944",
+          
+        });
+        await UserService.CreateUser(new katio.Data.Models.User
+        {
+            Id = 2,
+             Nombre = "Manuela",
+            Apellido = "Ruiz",
+            Email = "manu@gmail.com",
+            Telefono = "3115822149",
+            Password = "12345",
+            Identificacion = "10333658945",
+          
+        });
+        await UserService.CreateUser(new katio.Data.Models.User
+        {
+            Id = 3,
+            Nombre = "Maria Alejandra",
+            Apellido = "Colorado",
+            Email = "mariaaleja@secretos.org.co",
+            Telefono = "3015822126",
+            Password = "12345",
+            Identificacion = "10333658946",
+           
+        }); 
+        await UserService.CreateUser(new katio.Data.Models.User
+        {
+            Id = 4,
+             Nombre = "Venus del socorro",
+            Apellido = "Auxilio",
+            Email = "venusAma@gmail.com",
+            Telefono = "301582785",
+            Password = "123456",
+            Identificacion = "10333658947",
+           
+        });
+        #endregion
+    
     }
 }
 #endregion

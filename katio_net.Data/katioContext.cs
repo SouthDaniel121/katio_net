@@ -15,6 +15,7 @@ public class KatioContext : DbContext
     public DbSet<Narrator> Narrators { get; set; } = null;
     public DbSet<Genre> Genres { get; set; } = null;
     public DbSet<AudioBook> AudioBooks { get; set; } = null;
+    public DbSet<User> User { get; set; } = null;
 
 
 
@@ -30,6 +31,7 @@ public class KatioContext : DbContext
         builder.Entity<Narrator>().ToTable("Narrator").HasKey(k => k.Id);
         builder.Entity<Genre>().ToTable("Genre").HasKey(k => k.Id);
         builder.Entity<AudioBook>().ToTable("AudioBook").HasKey(k => k.Id);
+        builder.Entity<User>().ToTable("User").HasKey(k => k.Id);
         base.OnModelCreating(builder);
     }
 }

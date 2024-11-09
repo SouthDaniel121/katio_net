@@ -22,4 +22,5 @@ public static class BaseMessageStatus
     public const string AUDIOBOOK_NOT_FOUND = "404 AudioBook Not Found";
     public const string NARRATOR_NOT_FOUND = "404 Narrator Not Found";
     public const string GENRE_NOT_FOUND = "404 Genre Not Found";
+    public const string USER_NOT_FOUND = "404 User Not Found";
 }
