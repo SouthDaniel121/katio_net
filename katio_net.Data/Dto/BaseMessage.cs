@@ -23,4 +23,6 @@ public static class BaseMessageStatus
     public const string NARRATOR_NOT_FOUND = "404 Narrator Not Found";
     public const string GENRE_NOT_FOUND = "404 Genre Not Found";
     public const string USER_NOT_FOUND = "404 User Not Found";
+
+    public const string AUTHOR_ALREADY_EXISTS = "409 Already ";
 }

@@ -20,8 +20,9 @@ builder.Services.AddScoped<IAuthorService, AuthorService>();
 builder.Services.AddScoped<INarratorService, NarratorService>();
 builder.Services.AddScoped<IGenreService, GenreService>();
 builder.Services.AddScoped<IAudioBookService, AudioBookService>();
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
 
 
 var app = builder.Build();
@@ -42,13 +43,14 @@ app.MapControllers();
 app.Run();
 
 // Datos de Base de Datos en Memoria
-#region PopulateDB
 async void PopulateDB(WebApplication app)
 {
     using (var scope = app.Services.CreateAsyncScope())
     
     {
-        // Tabla de Autores
+     
+     
+       // Tabla de Autores
         #region author service
         var AuthorService = scope.ServiceProvider.GetService<IAuthorService>();
         await AuthorService.CreateAuthor(new katio.Data.Models.Author
@@ -823,7 +825,7 @@ async void PopulateDB(WebApplication app)
         });
 
         #endregion
-    
+
         
         // Tabla de User 
         #region User service
@@ -831,45 +833,47 @@ async void PopulateDB(WebApplication app)
              var UserService = scope.ServiceProvider.GetService<IUserService>();
         await UserService.CreateUser(new katio.Data.Models.User
         {
-            Id = 1,
+            
             Nombre = "Maria Camila",
             Apellido = "Gil Rojas",
             Email = "cami@gmail.com",
             Telefono = "3015822126",
             Password = "1234",
+             Username = "Cami",
             Identificacion = "10333658944",
           
         });
         await UserService.CreateUser(new katio.Data.Models.User
         {
-            Id = 2,
              Nombre = "Manuela",
             Apellido = "Ruiz",
             Email = "manu@gmail.com",
             Telefono = "3115822149",
             Password = "12345",
+            Username = "Manu",
             Identificacion = "10333658945",
           
         });
         await UserService.CreateUser(new katio.Data.Models.User
         {
-            Id = 3,
             Nombre = "Maria Alejandra",
             Apellido = "Colorado",
             Email = "mariaaleja@secretos.org.co",
             Telefono = "3015822126",
             Password = "12345",
+             Username = "Maria",
             Identificacion = "10333658946",
            
         }); 
         await UserService.CreateUser(new katio.Data.Models.User
         {
-            Id = 4,
+           
              Nombre = "Venus del socorro",
             Apellido = "Auxilio",
             Email = "venusAma@gmail.com",
             Telefono = "301582785",
             Password = "123456",
+             Username = "Socorro",
             Identificacion = "10333658947",
            
         });
@@ -877,4 +881,3 @@ async void PopulateDB(WebApplication app)
     
     }
 }
-#endregion
