@@ -18,18 +18,8 @@ Un proyecto basado en una bibloteca virtual dedicado para los usuarios en zonas 
 ## Equipo
 
 `Alejandro Buitrago `
-`Santiago Muñoz `
 `J Daniel Orrego `
 
-
-## Start-up
-
-Primero, ejecute el servidor de desarrollo (CMD o PowerShell):
-
-```bash
- dotnet watch --project Katio_net.API
-```
- 
 
 
 ## ↓ ¿ Qué tiene la aplicación ? ↓
@@ -44,14 +34,8 @@ Primero, ejecute el servidor de desarrollo (CMD o PowerShell):
 - [x] Buscar libro por editorial.
 - [x] Buscar libro por genero.
 - [x] Buscar libro por fecha de publicación.
-- [ ] Subir un libro en PDF a la biblioteca.
-- [ ] Servir un libro en PDF al cliente.
-- [ ] Agregar varios géneros a un libro.
-- [ ] Los libros pueden tener varios autores.
-- [ ] Agregar temas al libro.
-- [ ] un libro puede tener varios temas.
 - [x] No pueden haber dos versiones del mismo libro.
-- [ ] Agregar libros relacionados a un libro principal
+
 
 ### Autores
 
@@ -64,15 +48,12 @@ Primero, ejecute el servidor de desarrollo (CMD o PowerShell):
 
 ### Usuarios
 
-- [ ] Crear un usuario, utilizar el registro.
-- [ ] Login del usuario: debe regresar un token bearer. Al hacer login, debo poder usar el token para cuaquier otra acción.
-- [ ] Todas mis acciones deben quedar bajo llave, con la sola excepción de: Login, Signup.
-- [ ] Editar un usuario.
-- [ ] Debo poder reiniciar mi clave, solo mi clave. Debo colocar la clave anterior, y dos veces la clave nueva.
-- [ ] Listar todos mis usuarios.
-- [ ] Listar todos mis usuarios por email, o identificación.
-- [ ] Agregar un username. No todos los usuarios tienen un correo hábil. Ambos campos son distintos, pero puede repetir la información.
-- [ ] Manejar los perfiles (Roles) del usuario.
+- [x] Crear un usuario, utilizar el registro.
+- [x] Editar un usuario.
+- [x] Eliminar un usuario.
+- [x] Listar todos mis usuarios.
+- [x] Listar todos mis usuarios por email, o identificación.
+
 
 
 ### Audiolibros
@@ -85,15 +66,9 @@ Primero, ejecute el servidor de desarrollo (CMD o PowerShell):
 - [x] Buscar Audiolibro por editorial.
 - [x] Buscar Audiolibro por genero.
 - [x] Buscar Audiolibro por fecha de publicación.
-- [ ] Subir un audiolibro en MP3/OGG a la biblioteca.
-- [ ] Servir un audiolibro en MP3/OGG al cliente.
-- [ ] Buscar un audiolibro por narrador.
+- [x] Buscar un audiolibro por narrador.
 - [x] Buscar un audiolibro por longitud.
-- [ ] Agregar varios géneros a un libro.
-- [ ] Los libros pueden tener varios autores.
-- [ ] Agregar temas al libro.
-- [ ] un libro puede tener varios temas.
-- [ ] No pueden haber dos versiones del mismo libro.
+
 
 
 
@@ -103,15 +78,7 @@ Primero, ejecute el servidor de desarrollo (CMD o PowerShell):
 - [x] Editar un narrador
 - [x] Buscar por id
 - [x] Buscar narrador por nombre.
-- [ ] Buscar narrador por perfil de voz.
-- [ ] Buscar todos los audiolibros de un narradores por relación.
+- [x] Buscar todos los audiolibros de un narradores por relación.
 
 
-
-### Admin / Estadísticas
-
-- [ ] Ver mis usuarios, editarlos y desactivarlos.
-- [ ] Asignar una clave de forma directa a un usuario a través de la edición
-- [ ] El username y el email no son mutables.
-- [ ] Agregar estadísticas al sitio.
 
