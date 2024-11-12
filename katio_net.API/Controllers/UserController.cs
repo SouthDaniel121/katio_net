@@ -30,7 +30,7 @@ namespace katio.API.Controllers
 
         // Trae todos los Usuarios
         [HttpGet]
-        [Route("GetUsers")]
+        [Route("GetAllUsers")]
         public async Task<IActionResult> Index()
         {
             var response = await _userService.Index();

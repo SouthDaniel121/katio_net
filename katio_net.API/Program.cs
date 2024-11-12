@@ -34,7 +34,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-PopulateDB(app);
+//PopulateDB(app);
 
 app.UseHttpsRedirection();
 
@@ -304,7 +304,7 @@ async void PopulateDB(WebApplication app)
             Country = "EEUU",
             BirthDate = new DateOnly(1929, 10, 21)
         });
-        #endregion
+        #endregion*/
 
         // Tabla de Libros
         #region book service
@@ -708,7 +708,7 @@ async void PopulateDB(WebApplication app)
             DeweyIndex = "800",
             AuthorId = 34
         });
-        #endregion
+        #endregion*/
 
         // Tabla de Narradores
         #region narrator service
@@ -826,7 +826,7 @@ async void PopulateDB(WebApplication app)
 
         #endregion
 
-        
+      
         // Tabla de User 
         #region User service
 
@@ -834,8 +834,8 @@ async void PopulateDB(WebApplication app)
         await UserService.CreateUser(new katio.Data.Models.User
         {
             
-            Nombre = "Maria Camila",
-            Apellido = "Gil Rojas",
+            Name = "Maria Camila",
+            LastName = "Gil Rojas",
             Email = "cami@gmail.com",
             Telefono = "3015822126",
             Password = "1234",
@@ -845,8 +845,8 @@ async void PopulateDB(WebApplication app)
         });
         await UserService.CreateUser(new katio.Data.Models.User
         {
-             Nombre = "Manuela",
-            Apellido = "Ruiz",
+            Name = "Manuela",
+            LastName = "Ruiz",
             Email = "manu@gmail.com",
             Telefono = "3115822149",
             Password = "12345",
@@ -856,8 +856,8 @@ async void PopulateDB(WebApplication app)
         });
         await UserService.CreateUser(new katio.Data.Models.User
         {
-            Nombre = "Maria Alejandra",
-            Apellido = "Colorado",
+            Name = "Maria Alejandra",
+            LastName = "Colorado",
             Email = "mariaaleja@secretos.org.co",
             Telefono = "3015822126",
             Password = "12345",
@@ -868,8 +868,8 @@ async void PopulateDB(WebApplication app)
         await UserService.CreateUser(new katio.Data.Models.User
         {
            
-             Nombre = "Venus del socorro",
-            Apellido = "Auxilio",
+             Name = "Venus del socorro",
+            LastName = "Auxilio",
             Email = "venusAma@gmail.com",
             Telefono = "301582785",
             Password = "123456",
@@ -877,7 +877,7 @@ async void PopulateDB(WebApplication app)
             Identificacion = "10333658947",
            
         });
-        #endregion
+        #endregion */ 
     
     }
 }

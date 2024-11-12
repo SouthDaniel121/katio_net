@@ -40,7 +40,7 @@ public class UserService : IUserService
    // Crear Usuarios
    public async Task<BaseMessage<User>> CreateUser(User user)
    {
-       var existingUser = await _unitOfWork.UserRepository.GetAllAsync(n => n.Nombre == user.Nombre && n.Apellido == user.Apellido);
+       var existingUser = await _unitOfWork.UserRepository.GetAllAsync(n => n.Name == user.Name && n.LastName == user.LastName);
 
        if (existingUser.Any())
        {
@@ -48,8 +48,8 @@ public class UserService : IUserService
        }
        var newUser = new User()
        {
-           Nombre = user.Nombre,
-           Apellido = user.Apellido,
+           Name = user.Name,
+           LastName = user.LastName,
            Email = user.Email,
            Telefono = user.Telefono,
            Identificacion = user.Identificacion,
@@ -79,8 +79,8 @@ public class UserService : IUserService
            return Utilities.BuildResponse<User>(HttpStatusCode.NotFound, BaseMessageStatus.USER_NOT_FOUND, new List<User>());
        }
 
-           result.Nombre = user.Nombre;
-           result.Apellido = user.Apellido;
+           result.Name = user.Name;
+           result.LastName = user.LastName;
            result.Email = user.Email;
            result.Telefono = user.Telefono;
            result.Identificacion = user.Identificacion;
@@ -99,6 +99,7 @@ public class UserService : IUserService
        }
        return Utilities.BuildResponse(HttpStatusCode.OK, BaseMessageStatus.OK_200, new List<User> { result });
    }
+   
    // Eliminar Usuarios
    public async Task<BaseMessage<User>> DeleteUser(int id)
    {
@@ -119,7 +120,8 @@ public class UserService : IUserService
    }
    #endregion
 
-   #region  Busqueda 
+   #region  Busquedas
+
    //Buscar usuario por Id
    public async Task<BaseMessage<User>> GetUserById(int id)
    {
@@ -137,11 +139,11 @@ public class UserService : IUserService
    }
 
    // Buscar usuarios por Nombre
-   public async Task<BaseMessage<User>> GetUserByName(string nombre)
+   public async Task<BaseMessage<User>> GetUserByName(string name)
    {
        try
        {
-           var result = await _unitOfWork.UserRepository.GetAllAsync(a => a.Nombre.ToLower().Contains(nombre.ToLower()));
+           var result = await _unitOfWork.UserRepository.GetAllAsync(a => a.Name.ToLower().Contains(name.ToLower()));
            return result.Any() ? Utilities.BuildResponse<User>
                (HttpStatusCode.OK, BaseMessageStatus.OK_200, result) :
                Utilities.BuildResponse(HttpStatusCode.NotFound, BaseMessageStatus.USER_NOT_FOUND, new List<User>());
@@ -152,11 +154,11 @@ public class UserService : IUserService
    }
 
    // Buscar usuario por Apellido  
-   public async Task<BaseMessage<User>> GetUserByLastName(string apellido)
+   public async Task<BaseMessage<User>> GetUserByLastName(string lastname)
    {
        try
        {
-           var result = await _unitOfWork.UserRepository.GetAllAsync(b => b.Apellido.ToLower().Contains(apellido.ToLower()));
+           var result = await _unitOfWork.UserRepository.GetAllAsync(b => b.LastName.ToLower().Contains(lastname.ToLower()));
            return result.Any()
                ? Utilities.BuildResponse<User>(HttpStatusCode.OK, BaseMessageStatus.OK_200, result)
                : Utilities.BuildResponse(HttpStatusCode.NotFound, BaseMessageStatus.USER_NOT_FOUND, new List<User>());
@@ -166,7 +168,7 @@ public class UserService : IUserService
        }
    }
 
-   // Buscar usuarios por Genero
+   // Buscar usuarios por EMAIL
    public async Task<BaseMessage<User>> GetUserByEmail(string email)
    {
        try

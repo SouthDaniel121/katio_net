@@ -1,4 +1,6 @@
-﻿namespace katio.Data.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace katio.Data.Models
 {
     public class Author : BaseEntity<int>
     {
@@ -6,5 +8,8 @@
         public string LastName { get; set; } = string.Empty;
         public string Country { get; set; } = string.Empty;
         public DateOnly BirthDate { get; set; }
+
+       
+
     }
 }

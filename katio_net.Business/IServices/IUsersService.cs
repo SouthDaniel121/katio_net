@@ -7,8 +7,8 @@ public interface IUserService
 {
     Task<BaseMessage<User>> Index();
     Task<BaseMessage<User>> GetUserById(int Id);
-    Task<BaseMessage<User>> GetUserByName(string Nombre);
-    Task<BaseMessage<User>> GetUserByLastName(string Apellido);
+    Task<BaseMessage<User>> GetUserByName(string Name);
+    Task<BaseMessage<User>> GetUserByLastName(string LastName);
     Task<BaseMessage<User>> GetUserByEmail(string Email);
     Task<BaseMessage<User>> CreateUser(User user);
     Task<BaseMessage<User>> UpdateUser(User user);

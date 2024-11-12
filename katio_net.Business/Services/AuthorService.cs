@@ -34,7 +34,7 @@ public class AuthorService : IAuthorService
     }
 
 
-    #region Create Update Delete
+    #region Author | Crear → Eliminar → Actualizar
 
     // Crear Autores
     public async Task<BaseMessage<Author>> CreateAuthor(Author author)
@@ -101,7 +101,7 @@ public class AuthorService : IAuthorService
 
     #endregion
 
-    #region Find By Author
+    #region Busqueda por author | Id → Nombre → Apellido → Pais → Rangos Fechas de nacimiento.
     //Traer autores por Id
     public async Task<BaseMessage<Author>> GetAuthorById(int id)
     {
