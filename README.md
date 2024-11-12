@@ -18,7 +18,6 @@ Un proyecto basado en una bibloteca virtual dedicado para los usuarios en zonas 
 ## Equipo
 
 `Alejandro Buitrago `
-`Santiago Muñoz `
 `J Daniel Orrego `
 
 
