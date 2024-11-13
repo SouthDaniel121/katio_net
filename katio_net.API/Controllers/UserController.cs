@@ -103,9 +103,18 @@ namespace katio.API.Controllers
         // Trae un usuario por su email
         [HttpGet]
         [Route("GetUserByEmail")]
-        public async Task<IActionResult> GetUserByGenre(string Email)
+        public async Task<IActionResult> GetUserByEmail(string Email)
         {
             var response = await _userService.GetUserByEmail(Email);
+            return response.TotalElements > 0 ? Ok(response) : StatusCode(StatusCodes.Status404NotFound, response);
+        }
+
+        // Trae un usuario por su identificacion
+        [HttpGet]
+        [Route("GetUserByIdentificacion")]
+        public async Task<IActionResult> GetUserByIdentificacion(string Identificacion)
+        {
+            var response = await _userService.GetUserByIdentificacion(Identificacion);
             return response.TotalElements > 0 ? Ok(response) : StatusCode(StatusCodes.Status404NotFound, response);
         }
 

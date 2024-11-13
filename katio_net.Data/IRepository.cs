@@ -9,6 +9,8 @@ where TEntity : BaseEntity<TId>
 {
     Task AddAsync(TEntity entity);
     Task<TEntity> FindAsync(TId id);
+    
+
     Task Update(TEntity entity);
     Task Delete(TEntity entity);
     Task Delete(TId ind);

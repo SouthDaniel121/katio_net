@@ -106,7 +106,7 @@ public class UserService : IUserService
        var result = await _unitOfWork.UserRepository.FindAsync(id);
        if (result == null)
        {
-           return Utilities.BuildResponse<User>(HttpStatusCode.NotFound, BaseMessageStatus.NARRATOR_NOT_FOUND, new List<User>());
+           return Utilities.BuildResponse<User>(HttpStatusCode.NotFound, BaseMessageStatus.USER_NOT_FOUND, new List<User>());
        }
        try
        {
@@ -130,7 +130,7 @@ public class UserService : IUserService
            var result = await _unitOfWork.UserRepository.FindAsync(id);
            return result != null ? Utilities.BuildResponse<User>
                (HttpStatusCode.OK, BaseMessageStatus.OK_200, new List<User> { result }) :
-               Utilities.BuildResponse(HttpStatusCode.NotFound, BaseMessageStatus.BOOK_NOT_FOUND, new List<User>());
+               Utilities.BuildResponse(HttpStatusCode.NotFound, BaseMessageStatus.USER_DELETE_OF_NO_EXIST, new List<User>());
        } catch (Exception ex)
        {
            return Utilities.BuildResponse<User>(HttpStatusCode.InternalServerError, $"{BaseMessageStatus.INTERNAL_SERVER_ERROR_500} | {ex.Message}");
@@ -174,6 +174,21 @@ public class UserService : IUserService
        try
        {
            var result = await _unitOfWork.UserRepository.GetAllAsync(b => b.Email.ToLower().Contains(email.ToLower()));
+           return result.Any()
+               ? Utilities.BuildResponse<User>(HttpStatusCode.OK, BaseMessageStatus.OK_200, result)
+               : Utilities.BuildResponse(HttpStatusCode.NotFound, BaseMessageStatus.USER_NOT_FOUND, new List<User>());
+       } catch (Exception ex)
+       {
+           return Utilities.BuildResponse<User>(HttpStatusCode.InternalServerError,$"{BaseMessageStatus.INTERNAL_SERVER_ERROR_500},{ex.Message}");
+       }
+   }
+
+      // Buscar usuarios por IDENTIFICACION
+   public async Task<BaseMessage<User>> GetUserByIdentificacion(string identificacion)
+   {
+       try
+       {
+           var result = await _unitOfWork.UserRepository.GetAllAsync(b => b.Identificacion.ToLower().Contains(identificacion.ToLower()));
            return result.Any()
                ? Utilities.BuildResponse<User>(HttpStatusCode.OK, BaseMessageStatus.OK_200, result)
                : Utilities.BuildResponse(HttpStatusCode.NotFound, BaseMessageStatus.USER_NOT_FOUND, new List<User>());

@@ -24,5 +24,7 @@ public static class BaseMessageStatus
     public const string GENRE_NOT_FOUND = "404 Genre Not Found";
     public const string USER_NOT_FOUND = "404 User Not Found";
 
+    public const string USER_DELETE_OF_NO_EXIST = "404 User Delete OF No Exist";
+
     public const string AUTHOR_ALREADY_EXISTS = "409 Already ";
 }
