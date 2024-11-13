@@ -109,7 +109,7 @@ namespace katio.API.Controllers
             return response.TotalElements > 0 ? Ok(response) : StatusCode(StatusCodes.Status404NotFound, response);
         }
 
-        // Trae un usuario por su identificacion fallando
+        // Trae un usuario por su identificacion
         [HttpGet]
         [Route("GetUserByIdentificacion")]
         public async Task<IActionResult> GetUserByIdentificacion(string Identificacion)
