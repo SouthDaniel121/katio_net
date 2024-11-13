@@ -304,7 +304,7 @@ async void PopulateDB(WebApplication app)
             Country = "EEUU",
             BirthDate = new DateOnly(1929, 10, 21)
         });
-        #endregion*/
+        #endregion
 
         // Tabla de Libros
         #region book service
@@ -708,7 +708,7 @@ async void PopulateDB(WebApplication app)
             DeweyIndex = "800",
             AuthorId = 34
         });
-        #endregion*/
+        #endregion
 
         // Tabla de Narradores
         #region narrator service
@@ -877,7 +877,7 @@ async void PopulateDB(WebApplication app)
             Identificacion = "10333658947",
            
         });
-        #endregion */ 
+        #endregion  
     
     }
 }
