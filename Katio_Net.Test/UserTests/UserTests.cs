@@ -33,7 +33,7 @@ public class UserTests
             Telefono = "3015822126",
             Password = "1234",
              Username = "Cami",
-            Identificacion = "10333658944",
+            Identificacion = "10333658944"
             },
             new User
             { 
@@ -43,7 +43,7 @@ public class UserTests
             Telefono = "3115822149",
             Password = "12345",
             Username = "Manu",
-            Identificacion = "10333658945",
+            Identificacion = "10333658945"
             }
         };
     }
@@ -73,7 +73,7 @@ public class UserTests
         Assert.IsTrue(result.ResponseElements.Any());
     }
 
-/*
+
     // Test para actualizar narrador ESTA FALLANDO COMENTADO EN EL MOMENTO
     [TestMethod]
     public async Task UpdateUser()
@@ -85,15 +85,15 @@ public class UserTests
         var updatedUser = new User
         {
             Id = userToUpdate.Id,
-              Nombre = "Maria Camila Updated",
-            Apellido = "Gil Rojas Update",
+            Name = "Maria Camila Updated",
+            LastName = "Gil Rojas Update",
             Email = "cami@gmail.com Update",
             Telefono = "3015822126 Update",
             Password = "1234 Update",
             Username = "Cami Update",
-            Identificacion = "10333658944 Update",
+            Identificacion = "10333658944 Update"
         };
-        _user.FindAsync(updatedUser.Id).Returns(updatedUser);
+        _userRepository.FindAsync(updatedUser.Id).Returns(updatedUser);
         _userRepository.Update(updatedUser).Returns(Task.CompletedTask);
 
         // Act
@@ -102,11 +102,11 @@ public class UserTests
         // Assert
         Assert.IsTrue(result.ResponseElements.Any());
     }
- */
+ 
 
-    // Test para borrar narrador
+    // Test para borrar usuario
     [TestMethod]
-    public async Task DeleteNarrator()
+    public async Task DeleteUser()
     {
         // Arrange
         var userToDelete = _user.First();
@@ -148,7 +148,7 @@ public class UserTests
         Assert.IsTrue(result.ResponseElements.Any());
     }
 
-    // Test para traer por nombre de narrador
+    // Test para traer user por nombre 
     [TestMethod]
     public async Task GetUserByName()
     {
