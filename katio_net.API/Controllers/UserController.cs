@@ -51,7 +51,7 @@ namespace katio.API.Controllers
             return response.StatusCode == System.Net.HttpStatusCode.OK ? Ok(response) : StatusCode((int)response.StatusCode, response);
         }
 
-        // Actualizar Usuarios
+        // Actualizar Usuarios fallando
         [HttpPost]
         [Route("UpdateUser")]
         public async Task<IActionResult> UpdateNarrator(User user)
@@ -109,7 +109,7 @@ namespace katio.API.Controllers
             return response.TotalElements > 0 ? Ok(response) : StatusCode(StatusCodes.Status404NotFound, response);
         }
 
-        // Trae un usuario por su identificacion
+        // Trae un usuario por su identificacion fallando
         [HttpGet]
         [Route("GetUserByIdentificacion")]
         public async Task<IActionResult> GetUserByIdentificacion(string Identificacion)

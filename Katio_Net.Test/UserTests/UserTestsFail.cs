@@ -189,5 +189,23 @@ public class UserTestsFail
 
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
+        
     }
+    
+/*   Fallando por el momento
+    // Test para traer por identificacion
+    [TestMethod]
+    public async Task GetUserByIdentificacionFail()
+    {
+        // Arrange
+        var user = _user.First();
+        _userRepository.GetAllAsync(Arg.Any<Expression<Func<User, bool>>>()).ReturnsForAnyArgs(new List<User>());
+
+        // Act
+        var result = await _userService.GetUserByIdentificacion(user.Identificacion);
+
+        // Assert
+        Assert.IsFalse(result.ResponseElements.Any());
+    }
+    */
 }
