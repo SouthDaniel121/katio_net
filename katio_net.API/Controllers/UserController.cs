@@ -11,7 +11,7 @@ namespace katio.API.Controllers
 
         #region Servicio y Constructor  
 
-        // Servicio de narradores
+        // Servicio de usuarios
         private readonly IUserService _userService;
 
         // Constructor
@@ -25,7 +25,7 @@ namespace katio.API.Controllers
         #endregion
 
 
-        #region Todos los narradores 
+        #region Todos los usuarios
 
 
         // Trae todos los Usuarios
@@ -40,7 +40,7 @@ namespace katio.API.Controllers
 
         #endregion
 
-        #region Narradores | Crear →  Eliminar → Actualizar  
+        #region Usuarios | Crear →  Eliminar → Actualizar  
 
         // Crear Usuario
         [HttpPut]
@@ -51,7 +51,7 @@ namespace katio.API.Controllers
             return response.StatusCode == System.Net.HttpStatusCode.OK ? Ok(response) : StatusCode((int)response.StatusCode, response);
         }
 
-        // Actualizar Narradores
+        // Actualizar Usuarios
         [HttpPost]
         [Route("UpdateUser")]
         public async Task<IActionResult> UpdateNarrator(User user)
@@ -60,7 +60,7 @@ namespace katio.API.Controllers
             return response != null ? Ok(response) : StatusCode(StatusCodes.Status404NotFound, response);
         }
 
-        // Elimina un Narrador
+        // Elimina un Usuario
         [HttpDelete]
         [Route("DeleteUser")]
         public async Task<IActionResult> DeleteUser(int id)
