@@ -39,8 +39,7 @@ public class GenreTestsFail
             }
         };
     }
-
-    //TEST PARA FALLAR GENEROS LITERARIOS
+  //TEST PARA FALLAR GENEROS LITERARIOS
 
     // Test para crear genero literario
     [TestMethod]
@@ -66,7 +65,8 @@ public class GenreTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
-    // Test para actualizar genero literario
+
+     // Test para actualizar genero literario
     [TestMethod]
     public async Task UpdateGenreFail()
     {
@@ -80,6 +80,7 @@ public class GenreTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
+
     // Test para eliminar genero literario
     [TestMethod]
     public async Task DeleteGenreFail()
@@ -94,7 +95,8 @@ public class GenreTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
-    // Test para traer todos los generos literarios
+
+     // Test para traer todos los generos literarios
     [TestMethod]
     public async Task GetAllGenresFail()
     {
@@ -107,7 +109,8 @@ public class GenreTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
-    // Test para traer genero literario por id 
+
+    // Test para traer genero literario por id
     [TestMethod]
     public async Task GetByGenreIdFail()
     {
@@ -121,7 +124,8 @@ public class GenreTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
-    // Test para traer genero literarios nombre
+
+     // Test para traer genero literarios nombre
     [TestMethod]
     public async Task GetGenresByNameFail()
     {
@@ -135,6 +139,7 @@ public class GenreTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
+    
     // Test para traer genero literario descripcion
     [TestMethod]
     public async Task GetGenresByDescriptionFail()

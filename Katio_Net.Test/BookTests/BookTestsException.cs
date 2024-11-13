@@ -51,7 +51,7 @@ public class BookTestsException
 
     }
 
-    //TEST EXCEPSIONES | LIBROS
+ //TEST EXCEPSIONES | LIBROS
 
     // Test para traer todos los libros
     [TestMethod]
@@ -66,7 +66,7 @@ public class BookTestsException
         // Assert
         Assert.AreEqual((int)result.StatusCode, 500);
     }
-    // Test for creating book with repository exceptions
+    // Test para crear libro para excepcion del repository
     [TestMethod]
     public async Task CreatebookRepositoryException()
     {
@@ -90,7 +90,9 @@ public class BookTestsException
         // Assert
         Assert.AreEqual((int)result.StatusCode, 500);
     }
-    // Test para actualizar libro
+
+
+      // Test para actualizar libro
     [TestMethod]
     public async Task UpdateBookRepositoryException()
     {
@@ -118,6 +120,7 @@ public class BookTestsException
         // Assert
         Assert.AreEqual((int)result.StatusCode, 500);
     }
+
     // Test para eliminar libro 
     [TestMethod]
     public async Task DeleteBookRepositoryException()
@@ -133,6 +136,7 @@ public class BookTestsException
         // Assert
         Assert.AreEqual((int)result.StatusCode, 500);
     }
+
     // Test para traer libro por id 
     [TestMethod]
     public async Task GetBookByIdRepositoryException()
@@ -147,6 +151,7 @@ public class BookTestsException
         // Assert
         Assert.AreEqual((int)result.StatusCode, 500);
     }
+
     // Test para traer libro por nombre
     [TestMethod]
     public async Task GetBookByNameRepositoryException()
@@ -161,6 +166,8 @@ public class BookTestsException
         // Assert
         Assert.AreEqual((int)result.StatusCode, 500);
     }
+
+
     // Test para traer libro por ISBN10
     [TestMethod]
     public async Task GetBooksByISBN10RepositoryException()
@@ -175,6 +182,7 @@ public class BookTestsException
         // Assert
         Assert.AreEqual((int)result.StatusCode, 500);
     }
+
     // Test para traer libro por ISBN13
     [TestMethod]
     public async Task GetBooksByISBN13RepositoryException()
@@ -189,7 +197,8 @@ public class BookTestsException
         // Assert
         Assert.AreEqual((int)result.StatusCode, 500);
     }
-    // Test para traer libro por Edicion 
+
+    // Test para traer libro por Edicion
     [TestMethod]
     public async Task GetBooksByEditionRepositoryException()
     {
@@ -203,6 +212,7 @@ public class BookTestsException
         // Assert
         Assert.AreEqual((int)result.StatusCode, 500);
     }
+
     // Test para traer libro por rango de publicacion 
     [TestMethod]
     public async Task GetBooksByPublishedDateRangeRepositoryException()
@@ -218,7 +228,8 @@ public class BookTestsException
         // Assert
         Assert.AreEqual((int)result.StatusCode, 500);
     }
-    // Test para traer por DeweyIndex
+
+     // Test para traer por DeweyIndex
     [TestMethod]
     public async Task GetBooksByDeweyIndexRepositoryException()
     {
@@ -232,6 +243,7 @@ public class BookTestsException
         // Assert
         Assert.AreEqual((int)result.StatusCode, 500);
     }
+
     // Test para traer libro por el id del author
     [TestMethod]
     public async Task GetBooksByAuthorIdRepositoryException()
@@ -247,6 +259,7 @@ public class BookTestsException
         Assert.AreEqual((int)result.StatusCode, 500);
     }
     // Test para traer libro por nombre de author
+   // Test para traer libro por nombre de author
     [TestMethod]
     public async Task GetBooksByAuthorNameRepositoryException()
     {
@@ -260,7 +273,7 @@ public class BookTestsException
         // Assert
         Assert.AreEqual((int)result.StatusCode, 500);
     }
-     // Test para traer libro por apellido del author
+    // Test para traer libro por apellido del author
      [TestMethod]
      public async Task GetBooksByAuthorLastNameRepositoryException()
      {
@@ -274,6 +287,7 @@ public class BookTestsException
          // Assert
          Assert.AreEqual((int)result.StatusCode, 500);
      }
+
     // Test para traer libro por authores de pais 
     [TestMethod]
     public async Task GetBooksByAuthorCountryRepositoryException()
@@ -288,7 +302,8 @@ public class BookTestsException
         // Assert
         Assert.AreEqual((int)result.StatusCode, 500);
     }
-    // Test para traer libros por el nombre completo del author
+    
+   // Test para traer libros por el nombre completo del author
     [TestMethod]
     public async Task GetBooksByAuthorFullNameRepositoryException()
     {
@@ -302,6 +317,7 @@ public class BookTestsException
         // Assert
         Assert.AreEqual((int)result.StatusCode, 500);
     }
+
     // Test para traer libros por rango de fecha de nacimiento de los authores
     [TestMethod]
     public async Task GetBooksByAuthorBirthDateRangeRepositoryException()

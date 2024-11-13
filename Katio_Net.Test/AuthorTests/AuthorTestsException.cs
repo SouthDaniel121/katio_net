@@ -44,7 +44,7 @@ public class AuthorTestsException
 
     //Test Exception  | Authores
 
-    // test para crear autores
+    // test para crear autores    
     [TestMethod]
     public async Task CreateAuthorRepositoryException()
     {
@@ -65,7 +65,9 @@ public class AuthorTestsException
         // Assert
         Assert.AreEqual((int)result.StatusCode, 500);
     }
-    // Test para actualizar author
+
+
+    // Test para actualizar author    
     [TestMethod]
     public async Task UpdateAuthorRepositoryException()
     {
@@ -89,7 +91,8 @@ public class AuthorTestsException
         // Assert
         Assert.AreEqual((int)result.StatusCode, 500);
     }
-    // Test para borrar author
+
+   // Test para borrar author
     [TestMethod]
     public async Task DeleteAuthorRepositoryException()
     {
@@ -104,6 +107,8 @@ public class AuthorTestsException
         // Assert
         Assert.AreEqual((int)result.StatusCode, 500);
     }
+
+
     // Test para traer todos los authores
     [TestMethod]
     public async Task GetAllAuthorsRepositoryException()
@@ -117,7 +122,9 @@ public class AuthorTestsException
         // Assert
         Assert.AreEqual((int)result.StatusCode, 500);
     }
-    // Test para traer authores por id
+
+
+       // Test para traer authores por id
     [TestMethod]
     public async Task GetAuthorByIdRepositoryException()
     {
@@ -131,6 +138,7 @@ public class AuthorTestsException
         // Assert
         Assert.AreEqual((int)result.StatusCode, 500);
     }
+    
     // Test para traer authores por nombre
     [TestMethod]
     public async Task GetAuthorByNameRepositoryException()
@@ -145,7 +153,8 @@ public class AuthorTestsException
         // Assert
         Assert.AreEqual((int)result.StatusCode, 500);
     }
-    // Test para traer authores por apellido
+
+     // Test para traer authores por apellido    
     [TestMethod]
     public async Task GetAuthorByLastNameRepositoryException()
     {
@@ -174,7 +183,8 @@ public class AuthorTestsException
         // Assert
         Assert.AreEqual((int)result.StatusCode, 500);
     }
-    // Test para traer authores por pais
+
+     // Test para traer authores por pais
     [TestMethod]
     public async Task GetAuthorByCountryRepositoryException()
     {

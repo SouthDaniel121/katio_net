@@ -43,7 +43,6 @@ public class NarratorTestsFail
             }
         };
     }
-
     //TEST PARA FALLAR
 
     // Test Para crear narrador
@@ -71,6 +70,7 @@ public class NarratorTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
+
     // Test para actualizar Narrador
     [TestMethod]
     public async Task UpdateNarratorFail()
@@ -84,6 +84,7 @@ public class NarratorTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
+
     // Test para borrar narrador
     [TestMethod]
     public async Task DeleteNarratorFail()
@@ -98,7 +99,8 @@ public class NarratorTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
-    // Test para traer todos los narradores
+
+     // Test para traer todos los narradores
     [TestMethod]
     public async Task GetAllNarratorsFail()
     {
@@ -111,6 +113,7 @@ public class NarratorTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
+
     // Test para traer por el ID
     [TestMethod]
     public async Task GetNarratorByIdFail()
@@ -125,6 +128,7 @@ public class NarratorTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
+
     // Test para traer por el nombre
     [TestMethod]
     public async Task GetNarratorsByNameFail()
@@ -139,7 +143,8 @@ public class NarratorTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
-    // Test para traer por el apellido
+
+     // Test para traer por el apellido
     [TestMethod]
     public async Task GetNarratorsByLastNameFail()
     {
@@ -153,6 +158,7 @@ public class NarratorTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
+
     // Test para traer por genero literario
     [TestMethod]
     public async Task GetNarratorsByGenreFail()

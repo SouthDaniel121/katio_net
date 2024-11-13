@@ -38,8 +38,7 @@ public class GenreTestsException
             }
         };
     }
-
-    //TEST PARA EXCEPCIONES | GENEROS LITERARIOS
+ //TEST PARA EXCEPCIONES | GENEROS LITERARIOS
 
     // Test Para crear genero literios
     [TestMethod]
@@ -60,6 +59,7 @@ public class GenreTestsException
         // Assert
         Assert.AreEqual((int)result.StatusCode, 500);
     }
+
     // Test Para actualizar genero literario
     [TestMethod]
     public async Task UpdateGenreRepositoryException()
@@ -85,6 +85,7 @@ public class GenreTestsException
         // Assert
         Assert.AreEqual((int)result.StatusCode, 500);
     }
+
     // Test para borrar genero literario
     [TestMethod]
     public async Task DeleteGenreRepositoryException()
@@ -100,7 +101,8 @@ public class GenreTestsException
         // Assert
         Assert.AreEqual((int)result.StatusCode, 500);
     }
-    // Test para traer todos los generos literarios
+
+   // Test para traer todos los generos literarios
     [TestMethod]
     public async Task GetAllGenresRepositoryException()
     {
@@ -113,6 +115,7 @@ public class GenreTestsException
         // Assert
         Assert.AreEqual((int)result.StatusCode, 500);
     }
+
     // Test para traer generos literarios por Id
     [TestMethod]
     public async Task GetGenreByIdRepositoryException()

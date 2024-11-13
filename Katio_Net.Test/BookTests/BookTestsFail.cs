@@ -52,7 +52,7 @@ public class BookTestsFail
         };
     }
 
-    //TEST FALLAR | LIBROS
+     //TEST FALLAR | LIBROS
 
     // Test para crear libro
     [TestMethod]
@@ -87,6 +87,7 @@ public class BookTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
+
     // Test para actualizar libro 
     [TestMethod]
     public async Task UpdateBookFail()
@@ -101,7 +102,8 @@ public class BookTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
-    // Test para borrar libro
+
+     // Test para borrar libro
     [TestMethod]
     public async Task DeleteBookFail()
     {
@@ -115,6 +117,7 @@ public class BookTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
+
     // Test para traer todos los libros
     [TestMethod]
     public async Task GetAllBooksFail()
@@ -128,6 +131,7 @@ public class BookTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
+
     // Test para traer libro por id 
     [TestMethod]
     public async Task GetBookByIdFail()
@@ -142,6 +146,7 @@ public class BookTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
+
     // Test para traer libro por nombre
     [TestMethod]
     public async Task GetBookByNameFail()
@@ -156,7 +161,8 @@ public class BookTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
-    // Test para traer libro por isbn10
+
+   // Test para traer libro por isbn10
     [TestMethod]
     public async Task GetBooksByISBN10Fail()
     {
@@ -169,6 +175,7 @@ public class BookTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
+
     // Test para traer libro por ISBN13
     [TestMethod]
     public async Task GetBooksByISBN13Fail()
@@ -183,6 +190,7 @@ public class BookTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
+
     // Test para traer libro por edicion
     [TestMethod]
     public async Task GetBooksByEditionFail()
@@ -197,7 +205,8 @@ public class BookTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
-    // Test para traer libro por rango de publicacion 
+
+     // Test para traer libro por rango de publicacion 
     [TestMethod]
     public async Task GetBooksByPublishedDateRangeFail()
     {
@@ -212,6 +221,7 @@ public class BookTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
+
     // Test para traer libro por DeweyIndex
     [TestMethod]
     public async Task GetBooksByDeweyIndexFail()
@@ -226,6 +236,7 @@ public class BookTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
+
     // Test para traer libros por author id
     [TestMethod]
     public async Task GetBooksByAuthorIdFail()
@@ -240,6 +251,7 @@ public class BookTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
+    
     // Test para traer libros por el nombre completo del author
     [TestMethod]
     public async Task GetBooksByAuthorNameFail()
@@ -254,6 +266,7 @@ public class BookTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
+
      // Test para traer libro por apellido del author
      [TestMethod]
      public async Task GetBooksByAuthorLastNameFail()
@@ -268,6 +281,7 @@ public class BookTestsFail
          // Assert
          Assert.IsFalse(result.ResponseElements.Any());
      }
+
     // Test para traer libro por pais de author
     [TestMethod]
     public async Task GetBooksByAuthorCountryFail()
@@ -282,7 +296,8 @@ public class BookTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
-    // Test para traer libros por nombre completo de author
+
+     // Test para traer libros por nombre completo de author
     [TestMethod]
     public async Task GetBooksByAuthorFullNameFail()
     {
@@ -296,6 +311,7 @@ public class BookTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
+
     // Test para traer libros por rango de fecha de nacimiento del author
     [TestMethod]
     public async Task GetBooksByAuthorBirthDateRangeFail()

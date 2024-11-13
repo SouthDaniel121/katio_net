@@ -43,8 +43,6 @@ public class AuthorTestsFail
             }
         };
     }
-
-
     //TEST FALLAR | AUTHORES
 
     // Test para crear authores
@@ -74,7 +72,8 @@ public class AuthorTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
-    // Test para actualizar author
+
+     // Test para actualizar author
     [TestMethod]
     public async Task UpdateAuthorFail()
     {
@@ -88,7 +87,8 @@ public class AuthorTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
-    // Test para eliminar author
+
+     // Test para eliminar author
     [TestMethod]
     public async Task DeleteAuthorFail()
     {
@@ -102,7 +102,9 @@ public class AuthorTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
-    // Test para traer todos los authores
+
+
+   // Test para traer todos los authores
     [TestMethod]
     public async Task GetAllAuthorsFail()
     {
@@ -115,7 +117,8 @@ public class AuthorTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
-    // Test para traer author por id 
+
+     // Test para traer author por id 
     [TestMethod]
     public async Task GetAuthorByIdFail()
     {
@@ -129,7 +132,8 @@ public class AuthorTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
-    // Test para traer author por nombre
+
+     // Test para traer author por nombre
     [TestMethod]
     public async Task GetAuthorByNameFail()
     {
@@ -143,6 +147,7 @@ public class AuthorTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
+
     // Test para traer author por apellido 
     [TestMethod]
     public async Task GetAuthorByLastNameFail()
@@ -157,6 +162,7 @@ public class AuthorTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
+
     // Test para traer author por fecha de nacimiento 
     [TestMethod]
     public async Task GetAuthorsByBirthDateFail()
@@ -172,7 +178,8 @@ public class AuthorTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
-    // Test para traer author por pais
+    
+     // Test para traer author por pais
     [TestMethod]
     public async Task GetAuthorByCountryFail()
     {

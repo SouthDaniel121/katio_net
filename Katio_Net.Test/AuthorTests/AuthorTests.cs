@@ -87,7 +87,7 @@ public class AuthorTests
         // Assert
         Assert.IsTrue(result.ResponseElements.Any());
     }
-    // Test para eliminar author
+   // Test para eliminar author
     [TestMethod]
     public async Task DeleteAuthor()
     {
@@ -115,7 +115,7 @@ public class AuthorTests
         // Assert
         Assert.IsTrue(result.ResponseElements.Any());
     }
-    // Test para traer author por id
+     // Test para traer author por id
     [TestMethod]
     public async Task GetAuthorById()
     {
@@ -129,7 +129,8 @@ public class AuthorTests
         // Assert
         Assert.IsTrue(result.ResponseElements.Any());
     }
-    // Test para traer author por nombre
+
+     // Test para traer author por nombre
     [TestMethod]
     public async Task GetAuthorByName()
     {
@@ -143,7 +144,9 @@ public class AuthorTests
         // Assert
         Assert.IsTrue(result.ResponseElements.Any());
     }
-    // Test para traer author por apellido 
+
+
+       // Test para traer author por apellido 
     [TestMethod]
     public async Task GetAuthorByLastName()
     {
@@ -157,7 +160,7 @@ public class AuthorTests
         // Assert
         Assert.IsTrue(result.ResponseElements.Any());
     }
-    // Test para traer author por fecha de cumpleaños
+   // Test para traer author por fecha de cumpleaños
     [TestMethod]
     public async Task GetAuthorsByBirthDate()
     {

@@ -65,7 +65,7 @@ public class NarratorTestsException
         // Assert
         Assert.AreEqual((int)result.StatusCode, 500);
     }
-    // Test para actualizar Narrador
+     // Test para actualizar Narrador
     [TestMethod]
     public async Task UpdateNarratorRepositoryException()
     {
@@ -88,6 +88,7 @@ public class NarratorTestsException
         // Assert
         Assert.AreEqual((int)result.StatusCode, 500);
     }
+
     // Test para borrar Narrador
     [TestMethod]
     public async Task DeleteNarratorRepositoryException()
@@ -103,6 +104,7 @@ public class NarratorTestsException
         // Assert
         Assert.AreEqual((int)result.StatusCode, 500);
     }
+
     // Test para borrar todos los narradores
     [TestMethod]
     public async Task GetAllNarratorsRepositoryException()
@@ -116,7 +118,8 @@ public class NarratorTestsException
         // Assert
         Assert.AreEqual((int)result.StatusCode, 500);
     }
-    // Test para traer narrador por Id
+
+      // Test para traer narrador por Id
     [TestMethod]
     public async Task GetNarratorByIdRepositoryException()
     {
@@ -131,7 +134,7 @@ public class NarratorTestsException
         Assert.AreEqual((int)result.StatusCode, 500);
     }
 
-    // Test para traer por nombre 
+     // Test para traer por nombre 
     [TestMethod]
     public async Task GetNarratorsByNameRepositoryException()
     {
@@ -161,7 +164,7 @@ public class NarratorTestsException
         Assert.AreEqual((int)result.StatusCode, 500);
     }
 
-    // Test para traer narrador de genero literario
+     // Test para traer narrador de genero literario
     [TestMethod]
     public async Task GetNarratorsByGenreRepositoryException()
     {
