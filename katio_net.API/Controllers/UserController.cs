@@ -45,16 +45,17 @@ namespace katio.API.Controllers
         // Crear Usuario
         [HttpPut]
         [Route("CreateUser")]
-        public async Task<IActionResult> CreateNarrator(User user)
+        public async Task<IActionResult> CreateUser(User user)
         {
             var response = await _userService.CreateUser(user);
             return response.StatusCode == System.Net.HttpStatusCode.OK ? Ok(response) : StatusCode((int)response.StatusCode, response);
         }
 
+
         // Actualizar Usuarios fallando
         [HttpPost]
         [Route("UpdateUser")]
-        public async Task<IActionResult> UpdateNarrator(User user)
+        public async Task<IActionResult> UpdateUser(User user)
         {
             var response = await _userService.UpdateUser(user);
             return response != null ? Ok(response) : StatusCode(StatusCodes.Status404NotFound, response);
