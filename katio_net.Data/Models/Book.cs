@@ -15,7 +15,13 @@ namespace katio.Data.Models
 
         // Relacion
         [ForeignKey("Author")]
-        public int AuthorId { get; set; }
-        public virtual Author? Author { get; set; }
+    public int AuthorId {get; set;}
+
+    public virtual Author? Author{ get; set;}
+
+    public bool Any()
+    {
+        return Id > 0;
+    }
     }
 }
