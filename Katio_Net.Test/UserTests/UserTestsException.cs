@@ -28,13 +28,12 @@ public class UserTestsException
         {
             new User 
             { 
-            Name = "Maria Camila",
-            LastName = "Gil Rojas",
-            Email = "cami@gmail.com",
-            Telefono = "3015822126",
-            Password = "1234",
-            Username = "Cami",
-            Identificacion = "10333658944"
+            Name = "Daniela",
+            LastName = "Morena",
+            Email = "danieMor@gmail.com",
+            Telefono = "3015822144",
+            Password = "12345",
+            Identificacion = "10333658945"
             },
             new User 
             { 
@@ -43,7 +42,6 @@ public class UserTestsException
             Email = "cami@gmail.com",
             Telefono = "3015822126",
             Password = "1234",
-            Username = "Cami",
             Identificacion = "10333658944"
             }
         };
@@ -63,7 +61,6 @@ public class UserTestsException
             Email = "cami@gmail.com",
             Telefono = "3015822126",
             Password = "1234",
-            Username = "Cami",
             Identificacion = "10333658944", 
         };
         _userRepository.GetAllAsync(Arg.Any<Expression<Func<User, bool>>>()).Returns(new List<User>());
@@ -76,7 +73,7 @@ public class UserTestsException
         Assert.AreEqual((int)result.StatusCode, 500);
     }
 
-    /*
+    
     // Test para actualizar Usuario Fallando por el momento
     [TestMethod]
     public async Task UpdateUserRepositoryException()
@@ -92,7 +89,6 @@ public class UserTestsException
             Email = "cami@gmail.com",
             Telefono = "3015822126",
             Password = "1234",
-            Username = "Cami",
             Identificacion = "10333658944"
         };
         _userRepository.FindAsync(userToUpdate.Id).Returns(userToUpdate);
@@ -104,7 +100,7 @@ public class UserTestsException
         // Assert
         Assert.AreEqual((int)result.StatusCode, 500);
     }
-    */
+    
     
     // Test para borrar usuario
     [TestMethod]
@@ -196,8 +192,8 @@ public class UserTestsException
         Assert.AreEqual((int)result.StatusCode, 500);
     }
 
-    /*
-     // Test para traer usuario por identificacion Fallando por el momento
+    
+     // Test para traer usuario por identificacion 
     [TestMethod]
     public async Task GetUserByIdentificacionRepositoryException()
     {
@@ -211,5 +207,5 @@ public class UserTestsException
         // Assert
         Assert.AreEqual((int)result.StatusCode, 500);
     }
-    */
+    
 }

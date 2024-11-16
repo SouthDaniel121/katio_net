@@ -839,7 +839,6 @@ async void PopulateDB(WebApplication app)
             Email = "cami@gmail.com",
             Telefono = "3015822126",
             Password = "1234",
-             Username = "Cami",
             Identificacion = "10333658944",
           
         });
@@ -850,7 +849,6 @@ async void PopulateDB(WebApplication app)
             Email = "manu@gmail.com",
             Telefono = "3115822149",
             Password = "12345",
-            Username = "Manu",
             Identificacion = "10333658945",
           
         });
@@ -861,7 +859,6 @@ async void PopulateDB(WebApplication app)
             Email = "mariaaleja@secretos.org.co",
             Telefono = "3015822126",
             Password = "12345",
-             Username = "Maria",
             Identificacion = "10333658946",
            
         }); 
@@ -873,7 +870,6 @@ async void PopulateDB(WebApplication app)
             Email = "venusAma@gmail.com",
             Telefono = "301582785",
             Password = "123456",
-             Username = "Socorro",
             Identificacion = "10333658947",
            
         });

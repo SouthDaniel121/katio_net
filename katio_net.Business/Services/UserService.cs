@@ -53,8 +53,7 @@ public class UserService : IUserService
            Email = user.Email,
            Telefono = user.Telefono,
            Identificacion = user.Identificacion,
-           Password = user.Password,
-           Username =  user.Username
+           Password = user.Password
 
        };
        try
@@ -85,7 +84,6 @@ public class UserService : IUserService
            result.Telefono = user.Telefono;
            result.Identificacion = user.Identificacion;
            result.Password = user.Password;
-           result.Username =  user.Username;
 
 
        try 

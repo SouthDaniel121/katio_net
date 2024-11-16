@@ -34,7 +34,6 @@ public class UserTestsFail
             Email = "cami@gmail.com",
             Telefono = "3015822126",
             Password = "1234",
-            Username = "Cami",
             Identificacion = "10333658944"
             },
 
@@ -45,7 +44,6 @@ public class UserTestsFail
             Email = "manu@gmail.com",
             Telefono = "3115822149",
             Password = "12345",
-            Username = "Manu",
             Identificacion = "10333658945"
             }
         };
@@ -65,7 +63,6 @@ public class UserTestsFail
             Email = "cami@gmail.com",
             Telefono = "3015822126",
             Password = "1234",
-            Username = "Cami",
             Identificacion = "10333658944"
         };
         var newUser = new User
@@ -75,7 +72,6 @@ public class UserTestsFail
             Email = "manu@gmail.com",
             Telefono = "3115822149",
             Password = "12345",
-            Username = "Manu",
             Identificacion = "10333658945"
         };
         _userRepository.GetAllAsync(Arg.Any<Expression<Func<User, bool>>>()).ReturnsForAnyArgs(new List<User> { existingUser });
@@ -192,7 +188,7 @@ public class UserTestsFail
         
     }
     
-/*   Fallando por el momento
+
     // Test para traer por identificacion
     [TestMethod]
     public async Task GetUserByIdentificacionFail()
@@ -207,5 +203,5 @@ public class UserTestsFail
         // Assert
         Assert.IsFalse(result.ResponseElements.Any());
     }
-    */
+    
 }

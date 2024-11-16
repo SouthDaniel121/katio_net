@@ -32,7 +32,7 @@ public class UserTests
             Email = "cami@gmail.com",
             Telefono = "3015822126",
             Password = "1234",
-             Username = "Cami",
+
             Identificacion = "10333658944"
             },
             new User
@@ -42,7 +42,6 @@ public class UserTests
             Email = "manu@gmail.com",
             Telefono = "3115822149",
             Password = "12345",
-            Username = "Manu",
             Identificacion = "10333658945"
             }
         };
@@ -60,7 +59,6 @@ public class UserTests
             Email = "cami@gmail.com",
             Telefono = "3015822126",
             Password = "1234",
-            Username = "Cami",
             Identificacion = "10333658944",
         };
         _userRepository.GetAllAsync(Arg.Any<Expression<Func<User, bool>>>()).Returns(new List<User>());
@@ -73,8 +71,7 @@ public class UserTests
         Assert.IsTrue(result.ResponseElements.Any());
     }
 
-/*
-    // Test para actualizar narrador ESTA FALLANDO COMENTADO EN EL MOMENTO
+    // Test para actualizar usuario ESTA FALLANDO COMENTADO EN EL MOMENTO
     [TestMethod]
     public async Task UpdateUser()
     {
@@ -90,7 +87,6 @@ public class UserTests
             Email = "cami@gmail.com Update",
             Telefono = "3015822126 Update",
             Password = "1234 Update",
-            Username = "Cami Update",
             Identificacion = "10333658944 Update"
         };
         _userRepository.FindAsync(updatedUser.Id).Returns(updatedUser);
@@ -102,7 +98,7 @@ public class UserTests
         // Assert
         Assert.IsTrue(result.ResponseElements.Any());
     }
- */
+ 
 
     // Test para borrar usuario
     [TestMethod]
@@ -119,9 +115,9 @@ public class UserTests
         // Assert
         Assert.IsTrue(result.ResponseElements.Any());
     }
-    // Test para traer todos los narradorres
+    // Test para traer todos los usuarios
     [TestMethod]
-    public async Task GetAllNarrators() 
+    public async Task GetAllUser() 
     {
         // Arrange
         _userRepository.GetAllAsync().Returns(_user);
@@ -193,7 +189,6 @@ public class UserTests
         Assert.IsTrue(result.ResponseElements.Any());
     }
 
-    /* No funciona en el controlador por el momento
     // Test para traer usuario por identificacio CC,Dni u pasaporte entre otros...
     [TestMethod]
     public async Task GetUserByIdentificacion()
@@ -208,6 +203,6 @@ public class UserTests
         // Assert
         Assert.IsTrue(result.ResponseElements.Any());
     }
-    */
+    
     
 }
