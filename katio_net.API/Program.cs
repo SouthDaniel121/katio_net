@@ -10,6 +10,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<KatioContext>(
     opt => opt.UseNpgsql(builder.Configuration.GetConnectionString("KatioDBPSQL")));
 
+//Configuracion del Crosin Origin para el frontEnd
+builder.Services.AddCors(options => {
+     options.AddPolicy(name: "katioRules" , builder =>{
+        builder.AllowAnyHeader();
+        builder.AllowAnyHeader();
+        builder.AllowAnyOrigin();
+     });
+});
+
+
 // Agregar servicios al container
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
