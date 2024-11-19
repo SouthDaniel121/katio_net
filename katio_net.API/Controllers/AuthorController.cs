@@ -120,5 +120,20 @@ namespace katio.API.Controllers
         }
 
         #endregion
+
+        // Se hace para la busqueda inclusiva
+        #region Busqueda Author
+
+        [HttpPost("search")]
+        public async Task<IActionResult> SearchAuthorsAsync(string searchTerm)
+        {
+            var response = await _authorService.SearchAuthorsAsync(searchTerm);
+            return response.TotalElements > 0 ? Ok(response) : StatusCode(StatusCodes.Status404NotFound, response);
+        }
+
+
+
+        #endregion
+
     }
 }

@@ -3,6 +3,7 @@ using katio.Data.Models;
 using katio.Data.Dto;
 using katio.Data;
 using System.Net;
+using System.Linq.Expressions;
 
 namespace katio.Business.Services;
 
@@ -324,5 +325,77 @@ public class BookService : IBookService
             return Utilities.BuildResponse<Book>(HttpStatusCode.InternalServerError, $"{BaseMessageStatus.INTERNAL_SERVER_ERROR_500} | {ex.Message}");
         }
     }
+    #endregion
+
+
+    
+    // Para permitir la busqueda
+    #region Busqueda
+    
+     public async Task<BaseMessage<Book>> SearchBooksAsync(string searchTerm)
+    {
+        try
+        {
+            var parameter = Expression.Parameter(typeof(Book), "Book");
+            var searchExpressions = new List<Expression>();
+
+            var lowerSearchTerm = Expression.Constant(searchTerm.ToLower(), typeof(string));
+
+            var nameProperty = Expression.Property(parameter, nameof(Book.Name));
+            var nameToLower = Expression.Call(nameProperty, "ToLower", null);
+            var nameContains = Expression.Call(
+                nameToLower,
+                "Contains",
+                null,
+                lowerSearchTerm
+            );
+            searchExpressions.Add(nameContains);
+
+            var Isbn10Property = Expression.Property(parameter, nameof(Book.ISBN10));
+            var Isbn10ToLower = Expression.Call(Isbn10Property, "ToLower", null);
+            var Isbn10Contains = Expression.Call(
+                Isbn10ToLower,
+                "Contains",
+                null,
+                lowerSearchTerm
+            );
+            searchExpressions.Add(Isbn10Contains);
+
+            var Isbn13Property = Expression.Property(parameter, nameof(Book.ISBN13));
+            var Isbn13ToLower = Expression.Call(Isbn13Property, "ToLower", null);
+            var Isbn13Contains = Expression.Call(
+                Isbn13ToLower,
+                "Contains",
+                null,
+                lowerSearchTerm
+            );
+            searchExpressions.Add(Isbn13Contains);
+
+            if (DateOnly.TryParse(searchTerm, out var Published))
+            {
+                var publishedProperty = Expression.Property(parameter, nameof(Book.Published));
+                var publishedEquals = Expression.Equal(publishedProperty, Expression.Constant(Published));
+                searchExpressions.Add(publishedEquals);
+            }
+
+            var body = searchExpressions.Aggregate(Expression.OrElse);
+            var book = Expression.Lambda<Func<Book, bool>>(body, parameter);
+
+            var result = await _unitOfWork.BookRepository.GetAllAsync(book);
+            return result.Any() ? Utilities.BuildResponse(HttpStatusCode.OK, BaseMessageStatus.OK_200, result) :
+                Utilities.BuildResponse(HttpStatusCode.NotFound, BaseMessageStatus.AUTHOR_NOT_FOUND, new List<Book>());
+        }
+        catch (Exception ex)
+        {
+            return Utilities.BuildResponse<Book>(HttpStatusCode.InternalServerError, $"{BaseMessageStatus.INTERNAL_SERVER_ERROR_500} | {ex.Message}");
+        }
+    }
+
+    Task<BaseMessage<Book>> IBookService.SearchBooksAsync(string searchTerm)
+    {
+        throw new NotImplementedException();
+    }
+
+ 
     #endregion
 }

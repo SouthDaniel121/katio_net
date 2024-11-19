@@ -24,4 +24,6 @@ public interface IBookService
     Task<BaseMessage<Book>> GetBookByAuthorCountryAsync(string AuthorCountry);
     Task<BaseMessage<Book>> GetBookByAuthorFullNameAsync(string authorName, string authorLastName);
     Task<BaseMessage<Book>> GetBookByAuthorBirthDateRange(DateOnly StartDate, DateOnly EndDate);
+
+    Task<BaseMessage<Book>>  SearchBooksAsync(string searchTerm);
 }
