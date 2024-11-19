@@ -9,6 +9,8 @@ namespace katio.Data.Models
         public string Country { get; set; } = string.Empty;
         public DateOnly BirthDate { get; set; }
 
+        public string Description { get; set; } = string.Empty;
+
        
 
     }
