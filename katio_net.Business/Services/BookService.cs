@@ -332,15 +332,14 @@ public class BookService : IBookService
     // Para permitir la busqueda
     #region Busqueda
     
-     public async Task<BaseMessage<Book>> SearchBooksAsync(string searchTerm)
+     public async Task<BaseMessage<Book>> SearchBookAsync(string searchTerm)
     {
         try
         {
-            var parameter = Expression.Parameter(typeof(Book), "Book");
+            var parameter = Expression.Parameter(typeof(Book), "book");
             var searchExpressions = new List<Expression>();
-
             var lowerSearchTerm = Expression.Constant(searchTerm.ToLower(), typeof(string));
-
+            
             var nameProperty = Expression.Property(parameter, nameof(Book.Name));
             var nameToLower = Expression.Call(nameProperty, "ToLower", null);
             var nameContains = Expression.Call(
@@ -350,52 +349,65 @@ public class BookService : IBookService
                 lowerSearchTerm
             );
             searchExpressions.Add(nameContains);
-
-            var Isbn10Property = Expression.Property(parameter, nameof(Book.ISBN10));
-            var Isbn10ToLower = Expression.Call(Isbn10Property, "ToLower", null);
-            var Isbn10Contains = Expression.Call(
-                Isbn10ToLower,
+            
+            var isbn10Property = Expression.Property(parameter, nameof(Book.ISBN10));
+            var isbn10ToLower = Expression.Call(isbn10Property, "ToLower", null);
+            var isbn10Contains = Expression.Call(
+                isbn10ToLower,
                 "Contains",
                 null,
                 lowerSearchTerm
             );
-            searchExpressions.Add(Isbn10Contains);
-
-            var Isbn13Property = Expression.Property(parameter, nameof(Book.ISBN13));
-            var Isbn13ToLower = Expression.Call(Isbn13Property, "ToLower", null);
-            var Isbn13Contains = Expression.Call(
-                Isbn13ToLower,
+            searchExpressions.Add(isbn10Contains);
+            
+            var isbn13Property = Expression.Property(parameter, nameof(Book.ISBN13));
+            var isbn13ToLower = Expression.Call(isbn13Property, "ToLower", null);
+            var isbn13Contains = Expression.Call(
+                isbn13ToLower,
                 "Contains",
                 null,
                 lowerSearchTerm
             );
-            searchExpressions.Add(Isbn13Contains);
-
-            if (DateOnly.TryParse(searchTerm, out var Published))
+            searchExpressions.Add(isbn13Contains);
+            
+            var editionProperty = Expression.Property(parameter, nameof(Book.Edition));
+            var editionToLower = Expression.Call(editionProperty, "ToLower", null);
+            var editionContains = Expression.Call(
+                editionToLower,
+                "Contains",
+                null,
+                lowerSearchTerm
+            );
+            searchExpressions.Add(editionContains);
+           
+            var deweyIndexProperty = Expression.Property(parameter, nameof(Book.DeweyIndex));
+            var deweyIndexToLower = Expression.Call(deweyIndexProperty, "ToLower", null);
+            var deweyIndexContains = Expression.Call(
+                deweyIndexToLower,
+                "Contains",
+                null,
+                lowerSearchTerm
+            );
+            searchExpressions.Add(deweyIndexContains);
+           
+            if (DateOnly.TryParse(searchTerm, out var publishedDate))
             {
                 var publishedProperty = Expression.Property(parameter, nameof(Book.Published));
-                var publishedEquals = Expression.Equal(publishedProperty, Expression.Constant(Published));
+                var publishedEquals = Expression.Equal(publishedProperty, Expression.Constant(publishedDate));
                 searchExpressions.Add(publishedEquals);
             }
-
+         
             var body = searchExpressions.Aggregate(Expression.OrElse);
-            var book = Expression.Lambda<Func<Book, bool>>(body, parameter);
-
-            var result = await _unitOfWork.BookRepository.GetAllAsync(book);
+            var lambda = Expression.Lambda<Func<Book, bool>>(body, parameter);
+            var result = await _unitOfWork.BookRepository.GetAllAsync(lambda);
             return result.Any() ? Utilities.BuildResponse(HttpStatusCode.OK, BaseMessageStatus.OK_200, result) :
-                Utilities.BuildResponse(HttpStatusCode.NotFound, BaseMessageStatus.AUTHOR_NOT_FOUND, new List<Book>());
+                Utilities.BuildResponse(HttpStatusCode.NotFound, BaseMessageStatus.BOOK_NOT_FOUND, new List<Book>());
         }
         catch (Exception ex)
         {
             return Utilities.BuildResponse<Book>(HttpStatusCode.InternalServerError, $"{BaseMessageStatus.INTERNAL_SERVER_ERROR_500} | {ex.Message}");
         }
     }
-
-    Task<BaseMessage<Book>> IBookService.SearchBooksAsync(string searchTerm)
-    {
-        throw new NotImplementedException();
-    }
-
  
     #endregion
 }

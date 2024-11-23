@@ -164,19 +164,16 @@ namespace katio.API.Controllers
 
         #endregion
 
-           // Se hace para la busqueda inclusiva
-        #region Busqueda libros
+        
+        #region Busqueda en libros 
 
-        [HttpPost("search")]
-        public async Task<IActionResult>  SearchBooksAsync(string searchTerm)
+         [HttpGet]
+        [Route("SearchBook")]
+        public async Task<IActionResult> SearchBook(string searchTerm)
         {
-            var response = await _bookService.SearchBooksAsync(searchTerm);
-            return response.TotalElements > 0 ? Ok(response) : StatusCode(StatusCodes.Status404NotFound, response);
+            var response = await _bookService.SearchBookAsync(searchTerm);
+            return response != null ? Ok(response) : StatusCode(StatusCodes.Status404NotFound, response);
         }
-
-
-
         #endregion
-
     }
 }
