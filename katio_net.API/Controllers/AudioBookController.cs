@@ -186,5 +186,18 @@ namespace katio.API.Controllers
 
         #endregion
 
+        #region Buscador general 
+
+        [HttpGet]
+        [Route("SearchAudioBook")]
+        public async Task<IActionResult> SearchAudioBook(string searchTerm)
+        {
+            var response = await _audioBookService.SearchAudioBookAsync(searchTerm);
+            return response.TotalElements > 0 ? Ok(response) : StatusCode(StatusCodes.Status404NotFound, response);
+        }
+
+        #endregion
+
+
     }
 }

@@ -23,4 +23,5 @@ public interface IAudioBookService
     Task<BaseMessage<AudioBook>> GetAudioBookByNarratorLastName(string narratorLastName);
     Task<BaseMessage<AudioBook>> GetAudioBookByNarratorFullName(string NarratorName, string narratorLastName);
     Task<BaseMessage<AudioBook>> GetAudioBookByNarratorGenre(string genre);
+    Task<BaseMessage<AudioBook>> SearchAudioBookAsync(string searchTerm);
 }

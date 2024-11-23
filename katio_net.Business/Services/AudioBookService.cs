@@ -4,6 +4,7 @@ using katio.Data.Dto;
 using katio.Data;
 using System.Net;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace katio.Business.Services;
 
@@ -318,6 +319,93 @@ public class AudioBookService : IAudioBookService
         {
             return Utilities.BuildResponse<AudioBook>(HttpStatusCode.InternalServerError, $"{BaseMessageStatus.INTERNAL_SERVER_ERROR_500} | {ex.Message}");
         }
+    }
+    #endregion
+
+
+
+    #region  Buscador 
+
+     public async Task<BaseMessage<Book>> SearchBookAsync(string searchTerm)
+    {
+        try
+        {
+            var parameter = Expression.Parameter(typeof(Book), "book");
+            var searchExpressions = new List<Expression>();
+            var lowerSearchTerm = Expression.Constant(searchTerm.ToLower(), typeof(string));
+            
+            var nameProperty = Expression.Property(parameter, nameof(Book.Name));
+            var nameToLower = Expression.Call(nameProperty, "ToLower", null);
+            var nameContains = Expression.Call(
+                nameToLower,
+                "Contains",
+                null,
+                lowerSearchTerm
+            );
+            searchExpressions.Add(nameContains);
+            
+            var isbn10Property = Expression.Property(parameter, nameof(Book.ISBN10));
+            var isbn10ToLower = Expression.Call(isbn10Property, "ToLower", null);
+            var isbn10Contains = Expression.Call(
+                isbn10ToLower,
+                "Contains",
+                null,
+                lowerSearchTerm
+            );
+            searchExpressions.Add(isbn10Contains);
+            // Search in ISBN13
+            var isbn13Property = Expression.Property(parameter, nameof(Book.ISBN13));
+            var isbn13ToLower = Expression.Call(isbn13Property, "ToLower", null);
+            var isbn13Contains = Expression.Call(
+                isbn13ToLower,
+                "Contains",
+                null,
+                lowerSearchTerm
+            );
+            searchExpressions.Add(isbn13Contains);
+        
+            var editionProperty = Expression.Property(parameter, nameof(Book.Edition));
+            var editionToLower = Expression.Call(editionProperty, "ToLower", null);
+            var editionContains = Expression.Call(
+                editionToLower,
+                "Contains",
+                null,
+                lowerSearchTerm
+            );
+            searchExpressions.Add(editionContains);
+        
+            var deweyIndexProperty = Expression.Property(parameter, nameof(Book.DeweyIndex));
+            var deweyIndexToLower = Expression.Call(deweyIndexProperty, "ToLower", null);
+            var deweyIndexContains = Expression.Call(
+                deweyIndexToLower,
+                "Contains",
+                null,
+                lowerSearchTerm
+            );
+            searchExpressions.Add(deweyIndexContains);
+        
+            if (DateOnly.TryParse(searchTerm, out var publishedDate))
+            {
+                var publishedProperty = Expression.Property(parameter, nameof(Book.Published));
+                var publishedEquals = Expression.Equal(publishedProperty, Expression.Constant(publishedDate));
+                searchExpressions.Add(publishedEquals);
+            }
+            
+            var body = searchExpressions.Aggregate(Expression.OrElse);
+            var lambda = Expression.Lambda<Func<Book, bool>>(body, parameter);
+            var result = await _unitOfWork.BookRepository.GetAllAsync(lambda);
+            return result.Any() ? Utilities.BuildResponse(HttpStatusCode.OK, BaseMessageStatus.OK_200, result) :
+                Utilities.BuildResponse(HttpStatusCode.NotFound, BaseMessageStatus.BOOK_NOT_FOUND, new List<Book>());
+        }
+        catch (Exception ex)
+        {
+            return Utilities.BuildResponse<Book>(HttpStatusCode.InternalServerError, $"{BaseMessageStatus.INTERNAL_SERVER_ERROR_500} | {ex.Message}");
+        }
+    }
+
+    public Task<BaseMessage<AudioBook>> SearchAudioBookAsync(string searchTerm)
+    {
+        throw new NotImplementedException();
     }
     #endregion
 }
