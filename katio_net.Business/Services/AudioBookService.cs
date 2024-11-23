@@ -326,15 +326,17 @@ public class AudioBookService : IAudioBookService
 
     #region  Buscador 
 
-     public async Task<BaseMessage<Book>> SearchBookAsync(string searchTerm)
+     public async Task<BaseMessage<AudioBook>> SearchAudioBookAsync(string searchTerm)
     {
         try
         {
-            var parameter = Expression.Parameter(typeof(Book), "book");
+            var parameter = Expression.Parameter(typeof(AudioBook), "audioBook");
             var searchExpressions = new List<Expression>();
+
             var lowerSearchTerm = Expression.Constant(searchTerm.ToLower(), typeof(string));
-            
-            var nameProperty = Expression.Property(parameter, nameof(Book.Name));
+
+            // Search in Name
+            var nameProperty = Expression.Property(parameter, nameof(AudioBook.Name));
             var nameToLower = Expression.Call(nameProperty, "ToLower", null);
             var nameContains = Expression.Call(
                 nameToLower,
@@ -343,8 +345,9 @@ public class AudioBookService : IAudioBookService
                 lowerSearchTerm
             );
             searchExpressions.Add(nameContains);
-            
-            var isbn10Property = Expression.Property(parameter, nameof(Book.ISBN10));
+
+            // Search in ISBN10
+            var isbn10Property = Expression.Property(parameter, nameof(AudioBook.ISBN10));
             var isbn10ToLower = Expression.Call(isbn10Property, "ToLower", null);
             var isbn10Contains = Expression.Call(
                 isbn10ToLower,
@@ -353,8 +356,9 @@ public class AudioBookService : IAudioBookService
                 lowerSearchTerm
             );
             searchExpressions.Add(isbn10Contains);
+
             // Search in ISBN13
-            var isbn13Property = Expression.Property(parameter, nameof(Book.ISBN13));
+            var isbn13Property = Expression.Property(parameter, nameof(AudioBook.ISBN13));
             var isbn13ToLower = Expression.Call(isbn13Property, "ToLower", null);
             var isbn13Contains = Expression.Call(
                 isbn13ToLower,
@@ -363,8 +367,9 @@ public class AudioBookService : IAudioBookService
                 lowerSearchTerm
             );
             searchExpressions.Add(isbn13Contains);
-        
-            var editionProperty = Expression.Property(parameter, nameof(Book.Edition));
+
+            // Search in Edition
+            var editionProperty = Expression.Property(parameter, nameof(AudioBook.Edition));
             var editionToLower = Expression.Call(editionProperty, "ToLower", null);
             var editionContains = Expression.Call(
                 editionToLower,
@@ -373,39 +378,38 @@ public class AudioBookService : IAudioBookService
                 lowerSearchTerm
             );
             searchExpressions.Add(editionContains);
-        
-            var deweyIndexProperty = Expression.Property(parameter, nameof(Book.DeweyIndex));
-            var deweyIndexToLower = Expression.Call(deweyIndexProperty, "ToLower", null);
-            var deweyIndexContains = Expression.Call(
-                deweyIndexToLower,
+
+            // Search in Genre
+            var genreProperty = Expression.Property(parameter, nameof(AudioBook.Genre));
+            var genreToLower = Expression.Call(genreProperty, "ToLower", null);
+            var genreContains = Expression.Call(
+                genreToLower,
                 "Contains",
                 null,
                 lowerSearchTerm
             );
-            searchExpressions.Add(deweyIndexContains);
-        
+            searchExpressions.Add(genreContains);
+
+            // Search in Published (if searchTerm is a valid date)
             if (DateOnly.TryParse(searchTerm, out var publishedDate))
             {
-                var publishedProperty = Expression.Property(parameter, nameof(Book.Published));
+                var publishedProperty = Expression.Property(parameter, nameof(AudioBook.Published));
                 var publishedEquals = Expression.Equal(publishedProperty, Expression.Constant(publishedDate));
                 searchExpressions.Add(publishedEquals);
             }
-            
+
+            // Combine all search expressions with OR
             var body = searchExpressions.Aggregate(Expression.OrElse);
-            var lambda = Expression.Lambda<Func<Book, bool>>(body, parameter);
-            var result = await _unitOfWork.BookRepository.GetAllAsync(lambda);
+            var lambda = Expression.Lambda<Func<AudioBook, bool>>(body, parameter);
+
+            var result = await _unitOfWork.AudioBookRepository.GetAllAsync(lambda);
             return result.Any() ? Utilities.BuildResponse(HttpStatusCode.OK, BaseMessageStatus.OK_200, result) :
-                Utilities.BuildResponse(HttpStatusCode.NotFound, BaseMessageStatus.BOOK_NOT_FOUND, new List<Book>());
+                Utilities.BuildResponse(HttpStatusCode.NotFound, BaseMessageStatus.AUDIOBOOK_NOT_FOUND, new List<AudioBook>());
         }
         catch (Exception ex)
         {
-            return Utilities.BuildResponse<Book>(HttpStatusCode.InternalServerError, $"{BaseMessageStatus.INTERNAL_SERVER_ERROR_500} | {ex.Message}");
+            return Utilities.BuildResponse<AudioBook>(HttpStatusCode.InternalServerError, $"{BaseMessageStatus.INTERNAL_SERVER_ERROR_500} | {ex.Message}");
         }
-    }
-
-    public Task<BaseMessage<AudioBook>> SearchAudioBookAsync(string searchTerm)
-    {
-        throw new NotImplementedException();
     }
     #endregion
 }
