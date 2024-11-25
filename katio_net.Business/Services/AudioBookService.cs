@@ -330,7 +330,7 @@ public class AudioBookService : IAudioBookService
     {
         try
         {
-            var parameter = Expression.Parameter(typeof(AudioBook), "audioBook");
+            var parameter = Expression.Parameter(typeof(AudioBook), "AudioBook");
             var searchExpressions = new List<Expression>();
 
             var lowerSearchTerm = Expression.Constant(searchTerm.ToLower(), typeof(string));
