@@ -47,7 +47,7 @@ if (app.Environment.IsDevelopment())
 //PopulateDB(app);
 
 app.UseHttpsRedirection();
-
+app.UseCors("katioRules");
 app.MapControllers();
 
 app.Run();
