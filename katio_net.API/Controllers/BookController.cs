@@ -167,7 +167,7 @@ namespace katio.API.Controllers
         
         #region Busqueda en libros 
 
-         [HttpGet]
+         [HttpPost]
         [Route("SearchBook")]
         public async Task<IActionResult> SearchBook(string searchTerm)
         {
