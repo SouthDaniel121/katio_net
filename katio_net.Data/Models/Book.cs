@@ -11,7 +11,7 @@ namespace katio.Data.Models
         public string Edition { get; set; } = string.Empty;
         public string DeweyIndex { get; set; } = string.Empty;
 
-        public string AuthorN { get; set; } = string.Empty;
+        public string Person { get; set; } = string.Empty;
 
 
 
