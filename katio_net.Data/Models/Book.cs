@@ -10,8 +10,10 @@ namespace katio.Data.Models
         public DateOnly Published { get; set; } = new DateOnly();
         public string Edition { get; set; } = string.Empty;
         public string DeweyIndex { get; set; } = string.Empty;
+         
+         public string img { get; set; } = string.Empty;
 
-        public string Person { get; set; } = string.Empty;
+
 
 
 

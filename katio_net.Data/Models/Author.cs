@@ -11,6 +11,8 @@ namespace katio.Data.Models
 
         public string Description { get; set; } = string.Empty;
 
+        public string img { get; set; } = string.Empty;
+
        
 
     }

@@ -70,7 +70,7 @@ namespace katio.API.Controllers
 
         #endregion
 
-        #region Busqueda por autor | Nombre → Apellido → Id → Genero literario 
+        #region Busqueda por narrador | Nombre → Apellido → Id → Genero literario 
 
         // Trae un narrador por su id
         [HttpGet]
