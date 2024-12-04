@@ -58,7 +58,7 @@ Primero, ejecute el servidor de desarrollo (CMD o PowerShell):
 ### Usuarios
 
 - [x] Crear un usuario.
-- [ ] Editar un usuario.
+- [x] Editar un usuario.
 - [x] Buscar usuario por ID.
 - [x] Buscar usuario por Nombre.
 - [x] Buscar usuario por Apellido.
