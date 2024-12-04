@@ -21,8 +21,17 @@ Un proyecto basado en una bibloteca virtual dedicado para los usuarios en zonas 
 `J Daniel Orrego `
 
 
+## Start-up
 
-## ↓ ¿ Qué tiene la aplicación ? ↓
+Primero, ejecute el servidor de desarrollo (CMD o PowerShell):
+
+```bash
+ dotnet watch --project Katio_net.API
+```
+ 
+
+
+## ¿ Qué tiene la aplicación ? ↓
 
 ### Libros
 
@@ -48,11 +57,14 @@ Un proyecto basado en una bibloteca virtual dedicado para los usuarios en zonas 
 
 ### Usuarios
 
-- [x] Crear un usuario, utilizar el registro.
-- [x] Editar un usuario.
-- [x] Eliminar un usuario.
-- [x] Listar todos mis usuarios.
-- [x] Listar todos mis usuarios por email, o identificación.
+- [x] Crear un usuario.
+- [X] Editar un usuario.
+- [x] Buscar usuario por ID.
+- [x] Buscar usuario por Nombre.
+- [x] Buscar usuario por Apellido.
+- [x] Buscar usuario por Email.
+- [x] Eliminar Usuario por ID
+- [x] Busqueda por Identificacion
 
 
 
@@ -66,7 +78,6 @@ Un proyecto basado en una bibloteca virtual dedicado para los usuarios en zonas 
 - [x] Buscar Audiolibro por editorial.
 - [x] Buscar Audiolibro por genero.
 - [x] Buscar Audiolibro por fecha de publicación.
-- [x] Buscar un audiolibro por narrador.
 - [x] Buscar un audiolibro por longitud.
 
 
@@ -78,7 +89,6 @@ Un proyecto basado en una bibloteca virtual dedicado para los usuarios en zonas 
 - [x] Editar un narrador
 - [x] Buscar por id
 - [x] Buscar narrador por nombre.
-- [x] Buscar todos los audiolibros de un narradores por relación.
 
 
 
