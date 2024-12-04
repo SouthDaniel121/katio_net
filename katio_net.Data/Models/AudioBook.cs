@@ -14,6 +14,8 @@ namespace katio.Data.Models
         public string Path { get; set; } = string.Empty;
         public string img { get; set; } = string.Empty; 
 
+        public string Information  { get; set; } = string.Empty;
+
 
         // Relaciones
         [ForeignKey("Narrator")]

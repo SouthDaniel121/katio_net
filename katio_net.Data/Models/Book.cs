@@ -13,7 +13,7 @@ namespace katio.Data.Models
          
          public string img { get; set; } = string.Empty;
 
-         public string Person { get; set; } = string.Empty; 
+         public string description { get; set; } = string.Empty; 
 
 
 
