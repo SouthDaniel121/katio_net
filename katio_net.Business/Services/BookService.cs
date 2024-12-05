@@ -23,7 +23,7 @@ public class BookService : IBookService
     {
         try
         {
-            var result = await _unitOfWork.BookRepository.GetAllAsync();
+            var result = await _unitOfWork.BookRepository.GetAllAsync(includeProperties: "Author");
             return Utilities.BuildResponse<Book>(HttpStatusCode.OK, BaseMessageStatus.OK_200, result);
         }
         catch (Exception ex)
