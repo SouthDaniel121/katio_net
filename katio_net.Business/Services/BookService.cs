@@ -400,7 +400,7 @@ public class BookService : IBookService
          
             var body = searchExpressions.Aggregate(Expression.OrElse);
             var lambda = Expression.Lambda<Func<Book, bool>>(body, parameter);
-            var result = await _unitOfWork.BookRepository.GetAllAsync(lambda);
+            var result = await _unitOfWork.BookRepository.GetAllAsync(lambda, includeProperties:"Author");
             return result.Any() ? Utilities.BuildResponse(HttpStatusCode.OK, BaseMessageStatus.OK_200, result) :
                 Utilities.BuildResponse(HttpStatusCode.NotFound, BaseMessageStatus.BOOK_NOT_FOUND, new List<Book>());
         }
