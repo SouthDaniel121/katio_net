@@ -5,6 +5,8 @@ namespace katio.Data.Dto;
 public class BaseMessage<T>
     where T : class
 {
+    public bool IsSuccess;
+
     public string Message { get; set; }
     public HttpStatusCode StatusCode { get; set; }
     public int TotalElements { get; set; }

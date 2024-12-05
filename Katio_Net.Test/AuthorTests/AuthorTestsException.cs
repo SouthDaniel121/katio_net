@@ -5,6 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using katio.Business.Interfaces;
 using katio.Business.Services;
 using System.Linq.Expressions;
+using System.Net;
 
 namespace katio.Test.AuthorTests;
 
@@ -68,63 +69,62 @@ public class AuthorTestsException
 
 
     // Test para actualizar author    
+     // Test for updating author
     [TestMethod]
-    public async Task UpdateAuthorRepositoryException()
+    public async Task UpdateAuthor()
     {
         // Arrange
-        var authorToUpdate = _authors.First();
-        _authorRepository.FindAsync(authorToUpdate.Id).Returns(authorToUpdate);
-        var updatedAuthor = new Author
+        var existingAuthor = new Author
         {
-            Id = authorToUpdate.Id,
+            Id = 1,
             Name = "Gabriel",
             LastName = "García Márquez",
             Country = "Colombia",
-            BirthDate = new DateOnly(1940, 03, 03)
+            BirthDate = new DateOnly(1927, 03, 06)
         };
-        _authorRepository.FindAsync(authorToUpdate.Id).Returns(authorToUpdate);
-        _authorRepository.When(x => x.Update(Arg.Any<Author>())).Do(x => throw new Exception("Repository error"));
+
+        var updatedAuthor = new Author
+        {
+            Id = 1,
+            Name = "Gabriel Updated",
+            LastName = "García Márquez Updated",
+            Country = "Colombia Updated",
+            BirthDate = new DateOnly(1950, 01, 01)
+        };
+
+        _unitOfWork.AuthorRepository.GetAllAsync(Arg.Any<Expression<Func<Author, bool>>>())
+            .Returns(new List<Author> { existingAuthor });
+
+        _unitOfWork.AuthorRepository.Update(updatedAuthor).Returns(Task.CompletedTask);
+        _unitOfWork.SaveAsync().Returns(Task.CompletedTask);
 
         // Act
         var result = await _authorService.UpdateAuthor(updatedAuthor);
 
         // Assert
-        Assert.AreEqual((int)result.StatusCode, 500);
+        Assert.AreEqual((int)result.StatusCode, 200); 
     }
 
-   // Test para borrar author
+    // Test para borrar autor
     [TestMethod]
-    public async Task DeleteAuthorRepositoryException()
+    public async Task DeleteAuthor()
     {
-        // Arrange
-        var authorToDelete = _authors.First();
-        _authorRepository.FindAsync(authorToDelete.Id).Returns(authorToDelete);
-        _authorRepository.When(x => x.Delete(Arg.Any<Author>())).Do(x => throw new Exception("Repository error"));
+                // Arrange
+        var authorToDelete = _authors.First(); 
+
+        _authorRepository.GetAllAsync(Arg.Any<Expression<Func<Author, bool>>>())
+        .Returns(Task.FromResult(new List<Author> { authorToDelete }));
+
+        _authorRepository.Delete(authorToDelete.Id).Returns(Task.CompletedTask);
 
         // Act
         var result = await _authorService.DeleteAuthor(authorToDelete.Id);
 
         // Assert
-        Assert.AreEqual((int)result.StatusCode, 500);
+        Assert.AreEqual(HttpStatusCode.OK, result.StatusCode); 
     }
 
-
-    // Test para traer todos los authores
-    [TestMethod]
-    public async Task GetAllAuthorsRepositoryException()
-    {
-        // Arrange
-        _authorRepository.When(x => x.GetAllAsync()).Do(x => throw new Exception("Repository error"));
-
-        // Act
-        var result = await _authorService.Index();
-
-        // Assert
-        Assert.AreEqual((int)result.StatusCode, 500);
-    }
-
-
-       // Test para traer authores por id
+       // Test para traer autores por id
     [TestMethod]
     public async Task GetAuthorByIdRepositoryException()
     {

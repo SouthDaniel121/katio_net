@@ -73,37 +73,52 @@ public class AuthorTestsFail
         Assert.IsFalse(result.ResponseElements.Any());
     }
 
-     // Test para actualizar author
-    [TestMethod]
-    public async Task UpdateAuthorFail()
+     [TestMethod]
+    public async Task UpdateAuthorRepositoryException()
     {
         // Arrange
-        _authorRepository.Update(Arg.Any<Author>()).ThrowsAsyncForAnyArgs(new Exception());
-        _unitOfWork.AuthorRepository.Returns(_authorRepository);
+        var updatedAuthor = new Author
+        {
+            Id = 1,
+            Name = "Gabriel Updated",
+            LastName = "García Márquez Updated",
+            Country = "Colombia Updated",
+            BirthDate = new DateOnly(1950, 01, 01)
+        };
+
+        _unitOfWork.AuthorRepository
+            .GetAllAsync(Arg.Any<Expression<Func<Author, bool>>>())
+            .Returns(Task.FromResult(new List<Author> { updatedAuthor }));
+
+        _unitOfWork.AuthorRepository
+            .When(repo => repo.Update(Arg.Any<Author>()))
+            .Do(x => throw new Exception("Repository error"));
 
         // Act
-        var result = await _authorService.UpdateAuthor(new Author());
+        var result = await _authorService.UpdateAuthor(updatedAuthor);
 
         // Assert
-        Assert.IsFalse(result.ResponseElements.Any());
+        Assert.AreEqual((int)result.StatusCode, 500);
     }
-
-     // Test para eliminar author
+    // Test for deleting author with repository exceptions
     [TestMethod]
-    public async Task DeleteAuthorFail()
+    public async Task DeleteAuthorRepositoryException()
     {
         // Arrange
         var authorToDelete = _authors.First();
-        _authorRepository.FindAsync(authorToDelete.Id).ReturnsForAnyArgs(Task.FromResult<Author>(null));
+        _unitOfWork.AuthorRepository.GetAllAsync(Arg.Any<Expression<Func<Author, bool>>>())
+            .Returns(new List<Author> { authorToDelete });
+
+        _unitOfWork.AuthorRepository.When(x => x.Delete(authorToDelete.Id))
+            .Do(x => throw new Exception("Repository error"));
+
 
         // Act
         var result = await _authorService.DeleteAuthor(authorToDelete.Id);
 
         // Assert
-        Assert.IsFalse(result.ResponseElements.Any());
+        Assert.AreEqual((int)result.StatusCode, 500);
     }
-
-
    // Test para traer todos los authores
     [TestMethod]
     public async Task GetAllAuthorsFail()

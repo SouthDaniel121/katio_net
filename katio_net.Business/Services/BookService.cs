@@ -19,20 +19,21 @@ public class BookService : IBookService
     }
 
     // Traer todos los libros
-    public async Task<BaseMessage<Book>> Index()
+     public async Task<BaseMessage<Book>> Index()
     {
         try
         {
             var result = await _unitOfWork.BookRepository.GetAllAsync(includeProperties: "Author");
-            return Utilities.BuildResponse<Book>(HttpStatusCode.OK, BaseMessageStatus.OK_200, result);
+            return result.Any() ? Utilities.BuildResponse<Book>(HttpStatusCode.OK, BaseMessageStatus.OK_200, result) :
+                Utilities.BuildResponse<Book>(HttpStatusCode.NotFound, BaseMessageStatus.BOOK_NOT_FOUND, new List<Book>());
         }
         catch (Exception ex)
         {
-            return Utilities.BuildResponse<Book>(HttpStatusCode.InternalServerError, BaseMessageStatus.INTERNAL_SERVER_ERROR_500);
+            return Utilities.BuildResponse<Book>(HttpStatusCode.InternalServerError, $"{BaseMessageStatus.INTERNAL_SERVER_ERROR_500} | {ex.Message}");
         }
     }
 
-    #region Create Update Delete
+    #region Crear actualizar y borrar
 
     // Crear un Libro
     public async Task<BaseMessage<Book>> CreateBook(Book book)

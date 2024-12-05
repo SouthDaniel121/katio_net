@@ -38,7 +38,7 @@ public class AuthorService : IAuthorService
 
     #region Author | Crear → Eliminar → Actualizar
 
-    // Crear Autores
+     // Crear Autores
     public async Task<BaseMessage<Author>> CreateAuthor(Author author)
     {
         var existingAuthor = await _unitOfWork.AuthorRepository.GetAllAsync(a => a.Name == author.Name && a.LastName == author.LastName);
@@ -87,7 +87,7 @@ public class AuthorService : IAuthorService
 
         if (!existingAuthor.Any())
         {
-            return Utilities.BuildResponse<Author>(HttpStatusCode.Conflict, BaseMessageStatus.AUTHOR_NOT_FOUND);
+            return Utilities.BuildResponse<Author>(HttpStatusCode.NotFound, BaseMessageStatus.AUTHOR_NOT_FOUND);
         }
         try
         {
@@ -100,7 +100,6 @@ public class AuthorService : IAuthorService
 
         return Utilities.BuildResponse(HttpStatusCode.OK, BaseMessageStatus.OK_200, new List<Author> { });
     }
-
     #endregion
 
     #region Busqueda por author | Id → Nombre → Apellido → Pais → Rangos Fechas de nacimiento.

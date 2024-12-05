@@ -72,12 +72,13 @@ public class NarratorTestsFail
     }
 
     // Test para actualizar Narrador
-    [TestMethod]
+   [TestMethod]
     public async Task UpdateNarratorFail()
     {
         // Arrange
-        _narratorRepository.Update(Arg.Any<Narrator>()).ThrowsAsyncForAnyArgs(new Exception());
-        _unitOfWork.NarratorRepository.Returns(_narratorRepository);
+        _unitOfWork.NarratorRepository.GetAllAsync(Arg.Any<Expression<Func<Narrator, bool>>>())
+        .Returns(new List<Narrator>());
+
         // Act
         var result = await _narratorService.UpdateNarrator(new Narrator());
 

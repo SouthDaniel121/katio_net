@@ -49,13 +49,12 @@ public class BookTests
             }
         };
     }
-
     // Test para traer todos los libros
 
-    [TestMethod]
+     [TestMethod]
     public async Task GetAllBooks()
     {
-        // Arrange
+       // Arrange
         _bookRepository.GetAllAsync().Returns(_books);
 
         // Act
@@ -90,7 +89,7 @@ public class BookTests
         // Assert
         Assert.IsTrue(result.ResponseElements.Any());
     }
-   // Test para actualizar libro
+    // Test para actualizar libro
     [TestMethod]
     public async Task UpdateBook()
     {
@@ -136,7 +135,7 @@ public class BookTests
         Assert.IsTrue(result.ResponseElements.Any());
     }
 
-     // Test para traer por Id libro
+    // Test para traer por Id libro
     [TestMethod]
     public async Task GetBookById()
     {
@@ -166,7 +165,7 @@ public class BookTests
         Assert.IsTrue(result.ResponseElements.Any());
     }
 
-     // Test para traer libro por isbn10
+    // Test para traer libro por isbn10
     [TestMethod]
     public async Task GetBooksByISBN10()
     {
@@ -213,7 +212,7 @@ public class BookTests
         Assert.IsTrue(result.ResponseElements.Any());
     }
 
-     // Test para traer libros por edicion
+    // Test para traer libros por edicion
     [TestMethod]
     public async Task GetBooksByEdition()
     {
@@ -243,7 +242,7 @@ public class BookTests
         Assert.IsTrue(result.ResponseElements.Any());
     }
 
-   // Test para traer libro por id del author
+    // Test para traer libro por id del author
     [TestMethod]
     public async Task GetBooksByAuthorId()
     {
@@ -257,8 +256,8 @@ public class BookTests
         // Assert
         Assert.IsTrue(result.ResponseElements.Any());
     }
-    
-     // Test para traer libro por nombre de autor
+
+    // Test para traer libro por nombre de autor
     [TestMethod]
     public async Task GetBooksByAuthorName()
     {
@@ -272,20 +271,20 @@ public class BookTests
         // Assert
         Assert.IsTrue(result.ResponseElements.Any());
     }
- //  Test para traer por apellido de author
-     [TestMethod]
-     public async Task GetBooksByAuthorLastName()
-     {
-         // Arrange
-         var book = _books.First();
-         _bookRepository.GetAllAsync(Arg.Any<Expression<Func<Book, bool>>>(), includeProperties: "Author").Returns(new List<Book> { book });
+    //  Test para traer por apellido de author
+    [TestMethod]
+    public async Task GetBooksByAuthorLastName()
+    {
+        // Arrange
+        var book = _books.First();
+        _bookRepository.GetAllAsync(Arg.Any<Expression<Func<Book, bool>>>(), includeProperties: "Author").Returns(new List<Book> { book });
 
-         // Act
-         var result = await _bookService.GetBookByAuthorLastNameAsync("Garcia Marquez");
+        // Act
+        var result = await _bookService.GetBookByAuthorLastNameAsync("Garcia Marquez");
 
-         // Assert
-         Assert.IsTrue(result.ResponseElements.Any());
-     }
+        // Assert
+        Assert.IsTrue(result.ResponseElements.Any());
+    }
 
     //Test para traer por pais de author
     [TestMethod]
@@ -316,8 +315,8 @@ public class BookTests
         // Assert
         Assert.IsTrue(result.ResponseElements.Any());
     }
-    
-   // Test para traer todos los authores en un rango de nacimiento
+
+    // Test para traer todos los authores en un rango de nacimiento
     [TestMethod]
     public async Task GetBooksByAuthorBirthDateRange()
     {
