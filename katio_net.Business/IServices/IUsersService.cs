@@ -16,7 +16,6 @@ public interface IUserService
     Task<BaseMessage<User>> UpdateUser(User user);
     Task<BaseMessage<User>> DeleteUser(int id);
 
-    
 }
 
 

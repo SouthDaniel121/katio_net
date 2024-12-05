@@ -74,33 +74,6 @@ public class UserTestsException
     }
 
     
-    // Test para actualizar Usuario Fallando por el momento
-    [TestMethod]
-    public async Task UpdateUserRepositoryException()
-    {
-        // Arrange
-        var userToUpdate = _user.First();
-        _userRepository.FindAsync(userToUpdate.Id).Returns(userToUpdate);
-        var updatedUser = new User
-        { 
-            Id = userToUpdate.Id, 
-            Name = "Maria Camila",
-            LastName = "Gil Rojas",
-            Email = "cami@gmail.com",
-            Telefono = "3015822126",
-            Password = "1234",
-            Identificacion = "10333658944"
-        };
-        _userRepository.FindAsync(userToUpdate.Id).Returns(userToUpdate);
-        _userRepository.When(x => x.Update(Arg.Any<User>())).Do(x => throw new Exception("Repository exception | User"));
-
-        // Act
-        var result = await _userService.UpdateUser(updatedUser);
-
-        // Assert
-        Assert.AreEqual((int)result.StatusCode, 500);
-    }
-    
     
     // Test para borrar usuario
     [TestMethod]

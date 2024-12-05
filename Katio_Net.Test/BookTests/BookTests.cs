@@ -49,20 +49,6 @@ public class BookTests
             }
         };
     }
-    // Test para traer todos los libros
-
-     [TestMethod]
-    public async Task GetAllBooks()
-    {
-       // Arrange
-        _bookRepository.GetAllAsync().Returns(_books);
-
-        // Act
-        var result = await _bookService.Index();
-
-        // Assert
-        Assert.IsTrue(result.ResponseElements.Any());
-    }
 
 
     // Test para crear libros

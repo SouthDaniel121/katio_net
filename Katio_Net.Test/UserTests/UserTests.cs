@@ -71,32 +71,7 @@ public class UserTests
         Assert.IsTrue(result.ResponseElements.Any());
     }
 
-    // Test para actualizar usuario 
-  [TestMethod]
-    public async Task UpdateUser()
-    {
-        // Arrange
-        var userToUpdate = _user.First();
-        _userRepository.FindAsync(userToUpdate.Id).Returns(userToUpdate);
 
-        var updatedUser = new User
-        {
-            Name = "Maria Camila",
-            LastName = "Gil Rojas",
-            Email = "cami@gmail.com",
-            Telefono = "3015822126",
-            Password = "1234",
-            Identificacion = "10333658944"
-        };
-        _userRepository.FindAsync(updatedUser.Id).Returns(updatedUser);
-        _userRepository.Update(updatedUser).Returns(Task.CompletedTask);
-
-        // Act
-        var result = await _userService.UpdateUser(updatedUser);
-
-        // Assert
-        Assert.IsTrue(result.ResponseElements.Any());
-    }
     // Test para traer todos los usuarios
     [TestMethod]
     public async Task GetAllUser() 

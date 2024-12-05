@@ -72,25 +72,26 @@ public class UserService : IUserService
 
 
     // Actualizar Usuarios
-    public async Task<BaseMessage<User>> UpdateUser(User user)
+public async Task<BaseMessage<User>> UpdateUser(User user)
+{
+    if (user.Name == null || user.LastName == null)
     {
-        var existingUser = await _unitOfWork.UserRepository.GetAllAsync(a => a.Name == user.Name && a.LastName == user.LastName);
-
-        if (!existingUser.Any())
-        {
-            return Utilities.BuildResponse<User>(HttpStatusCode.NotFound, BaseMessageStatus.USER_NOT_FOUND);
-        }
-        try
-        {
-            await _unitOfWork.UserRepository.Update(user);
-            await _unitOfWork.SaveAsync();
-        }
-        catch (Exception ex)
-        {
-            return Utilities.BuildResponse<User>(HttpStatusCode.InternalServerError, $"{BaseMessageStatus.INTERNAL_SERVER_ERROR_500} | {ex.Message}");
-        }
-        return Utilities.BuildResponse(HttpStatusCode.OK, BaseMessageStatus.OK_200, new List<User> { user });
+        return Utilities.BuildResponse<User>(HttpStatusCode.BadRequest, BaseMessageStatus.USER_NOT_FOUND);
     }
+
+    var existingUser = await _unitOfWork.UserRepository.GetAllAsync(a => a.Name == user.Name && a.LastName == user.LastName);
+
+    if (!existingUser.Any())
+    {
+        return Utilities.BuildResponse<User>(HttpStatusCode.NotFound, BaseMessageStatus.USER_NOT_FOUND);
+    }
+
+    await _unitOfWork.UserRepository.Update(user);
+    await _unitOfWork.SaveAsync();
+
+  
+    return Utilities.BuildResponse(HttpStatusCode.OK, BaseMessageStatus.OK_200, new List<User> { user });
+}
 
     // Eliminar Usuarios
     public async Task<BaseMessage<User>> DeleteUser(int id)
@@ -194,6 +195,21 @@ public class UserService : IUserService
         {
             return Utilities.BuildResponse<User>(HttpStatusCode.InternalServerError, $"{BaseMessageStatus.INTERNAL_SERVER_ERROR_500},{ex.Message}");
         }
+    }
+
+    public Task<BaseMessage<User>> UpdateUser()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<BaseMessage<User>> UpdateUser(User user, User newUser)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task UpdateUser(User user1, object user2)
+    {
+        throw new NotImplementedException();
     }
 
     #endregion

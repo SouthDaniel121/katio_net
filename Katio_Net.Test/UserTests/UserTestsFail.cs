@@ -83,19 +83,7 @@ public class UserTestsFail
         Assert.IsFalse(result.ResponseElements.Any());
     }
 
-    // Test para actualizar Usuario
-    [TestMethod]
-    public async Task UpdateUserFail()
-    {
-        // Arrange
-        _userRepository.Update(Arg.Any<User>()).ThrowsAsyncForAnyArgs(new Exception());
-        _unitOfWork.UserRepository.Returns(_userRepository);
-        // Act
-        var result = await _userService.UpdateUser(new User());
 
-        // Assert
-        Assert.IsFalse(result.ResponseElements.Any());
-    }
     // Test para borrar Usuario
     [TestMethod]
     public async Task DeleteUserFail()

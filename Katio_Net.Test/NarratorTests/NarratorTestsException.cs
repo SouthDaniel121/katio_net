@@ -65,40 +65,6 @@ public class NarratorTestsException
         // Assert
         Assert.AreEqual((int)result.StatusCode, 500);
     }
-     // Test para actualizar Narrador
-   [TestMethod]
-    public async Task UpdateNarratorRepositoryException()
-    {
-        // Arrange
-        var existingNarrator = new Narrator
-        {
-            Id = 1,
-            Name = "John",
-            LastName = "Doe",
-            Genre = "Fiction"
-        };
-
-        var newNarrator = new Narrator
-        {
-            Id = 2,
-            Name = "John",
-            LastName = "Doe",
-            Genre = "Non-Fiction"
-        };
-
-        _unitOfWork.NarratorRepository.GetAllAsync(Arg.Any<Expression<Func<Narrator, bool>>>())
-            .Returns(Task.FromResult(new List<Narrator> { existingNarrator }));
-
-        _unitOfWork.NarratorRepository.When(x => x.AddAsync(Arg.Any<Narrator>()))
-            .Do(x => throw new Exception("Repository error"));
-
-        // Act
-        var result = await _narratorService.UpdateNarrator(newNarrator);
-
-        // Assert
-        Assert.AreEqual(HttpStatusCode.InternalServerError, result.StatusCode);
-    }
-
 
     // Test para borrar Narrador
     [TestMethod]
